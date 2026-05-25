@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
+<meta name="description" content="Una sorpresa especial para Maisa ✈️🇦🇷🇪🇸"/>
+<title>¡Maisa se va! ✈️</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Dancing+Script:wght@600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ─── RESET ─── */
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{min-height:100%;font-family:'Inter',sans-serif;overflow-x:hidden;}
+
+/* ─── BACKGROUNDS ─── */
+#bgArg{
+  position:fixed;inset:0;z-index:0;
+  background-color:#f5f0e8;
+  transition:opacity 2.5s ease;
+}
+#bgArg::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(90deg,rgba(116,172,223,.42) 0,rgba(116,172,223,.42) 50px,transparent 50px,transparent 100px),
+    repeating-linear-gradient(180deg,rgba(116,172,223,.42) 0,rgba(116,172,223,.42) 50px,transparent 50px,transparent 100px);
+  mix-blend-mode:multiply;
+}
+#bgArg::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 50% at 50% 40%,rgba(245,240,232,.65) 0%,transparent 100%);
+}
+#bgEsp{
+  position:fixed;inset:0;z-index:0;
+  display:flex;flex-direction:column;
+  opacity:0;pointer-events:none;
+  transition:opacity 2.5s ease;
+}
+#bgEsp .r{flex:1;background:#c60b1e;}
+#bgEsp .y{flex:2;background:#ffc400;}
+
+/* ─── LAYOUT ─── */
+.page{
+  position:relative;z-index:10;
+  display:flex;flex-direction:column;align-items:center;
+  min-height:100vh;
+  padding:2rem 1rem 3rem;
+  text-align:center;
+  max-width:860px;
+  margin:0 auto;
+}
+
+/* ─── FLAGS ─── */
+.flags-row{
+  display:flex;align-items:center;gap:.8rem;
+  font-size:clamp(1.8rem,5vw,2.5rem);
+  margin-bottom:.5rem;
+  animation:floatF 3s ease-in-out infinite;
+}
+@keyframes floatF{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.arr{font-size:clamp(.9rem,3vw,1.2rem);animation:arrP 1.5s ease-in-out infinite;}
+@keyframes arrP{0%,100%{opacity:.4;transform:scaleX(1)}50%{opacity:1;transform:scaleX(1.3)}}
+
+/* ─── HEADINGS ─── */
+h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.6rem,5vw,2.8rem);
+  font-weight:700;color:#1a3a6b;
+  text-shadow:0 2px 14px rgba(255,255,255,.95);
+  margin-bottom:.2rem;transition:color 2.5s;
+}
+.subtitle{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:clamp(.82rem,2.5vw,1.05rem);
+  color:#1a3a6b;opacity:.85;margin-bottom:.7rem;transition:color 2.5s;
+}
+
+/* ─── SOL ─── */
+#sol{margin:.2rem 0 -.2rem;transition:opacity 2.5s;}
+
+/* ─── COUNTER ─── */
+.counter-wrap{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:.7rem;width:100%;
+  max-width:min(600px,90vw);
+  margin:0 auto .9rem;
+}
+.cbox{
+  background:rgba(255,255,255,.75);
+  border:1.5px solid rgba(116,172,223,.55);
+  border-radius:18px;
+  padding:clamp(.7rem,2.5vw,1.2rem) .5rem;
+  backdrop-filter:blur(6px);
+  box-shadow:0 4px 18px rgba(26,58,107,.1);
+  transition:background 2.5s,border-color 2.5s;
+  position:relative;overflow:hidden;
+}
+.cbox::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,#74ACDF,#F6B40E,#74ACDF);
+  transition:background 2.5s;
+}
+.cnum{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,6vw,3.5rem);
+  font-weight:700;color:#1a3a6b;
+  line-height:1;margin-bottom:.2rem;transition:color 2.5s;
+}
+.clbl{
+  font-size:clamp(.55rem,1.5vw,.7rem);
+  letter-spacing:.14em;text-transform:uppercase;
+  color:#1a3a6b;opacity:.7;transition:color 2.5s;
+}
+
+/* ─── PROGRESS ─── */
+.prog-wrap{width:100%;max-width:min(600px,90vw);margin:0 auto .7rem;}
+.prog-bg{height:8px;background:rgba(255,255,255,.5);border-radius:99px;overflow:hidden;border:1px solid rgba(116,172,223,.4);}
+.prog-fill{height:100%;background:linear-gradient(90deg,#74ACDF,#F6B40E);border-radius:99px;transition:width .8s ease,background 2.5s;}
+.prog-labels{display:flex;justify-content:space-between;font-size:clamp(.62rem,1.8vw,.75rem);color:#1a3a6b;opacity:.75;margin-top:.4rem;transition:color 2.5s;}
+
+/* ─── DAY DOTS ─── */
+.days-row{
+  display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center;
+  max-width:min(600px,90vw);margin:0 auto .6rem;
+}
+.dot{
+  width:clamp(32px,7vw,44px);height:clamp(32px,7vw,44px);
+  border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-size:clamp(.56rem,1.5vw,.7rem);gap:2px;
+  border:1.5px solid rgba(116,172,223,.4);
+  background:rgba(255,255,255,.5);color:#1a3a6b;
+}
+.dot.passed{background:rgba(116,172,223,.3);border-color:rgba(116,172,223,.7);}
+.dot.today{background:#74ACDF;border-color:#1a3a6b;color:#fff;animation:glow 2s ease-in-out infinite;}
+.dot.arrival{background:linear-gradient(135deg,#c60b1e,#ffc400);border-color:#c60b1e;color:#fff;}
+@keyframes glow{0%,100%{box-shadow:0 0 12px rgba(116,172,223,.7)}50%{box-shadow:0 0 22px rgba(116,172,223,1)}}
+.dn{font-size:clamp(.7rem,2vw,.85rem);font-weight:700;line-height:1;}
+.de{font-size:clamp(.55rem,1.5vw,.68rem);line-height:1;}
+
+/* ─── FOTO DIA ─── */
+#fotoDiaWrap{display:none;width:100%;max-width:min(600px,90vw);margin:0 auto .5rem;}
+#fotoDiaBox{
+  background:rgba(255,255,255,.6);
+  border:1.5px solid rgba(116,172,223,.5);
+  border-radius:12px;padding:.55rem 1rem;
+  font-size:clamp(.72rem,2vw,.82rem);
+  color:#1a3a6b;font-style:italic;
+  font-family:'Playfair Display',serif;
+  transition:background 2.5s,border-color 2.5s,color 2.5s;
+}
+
+/* ─── DIVIDER ─── */
+.divider{
+  width:100%;max-width:min(600px,90vw);
+  display:flex;align-items:center;gap:.8rem;
+  margin:.5rem auto .7rem;
+}
+.divider-line{flex:1;height:1px;background:rgba(26,58,107,.18);transition:background 2.5s;}
+.divider-icon{font-size:1.2rem;opacity:.7;}
+
+/* ─── MESSAGE ─── */
+.msg-card{
+  background:rgba(255,255,255,.7);
+  border:1.5px solid rgba(116,172,223,.4);
+  border-radius:22px;
+  padding:clamp(1rem,3vw,1.6rem) clamp(1rem,4vw,2rem);
+  max-width:min(600px,90vw);width:100%;
+  backdrop-filter:blur(8px);margin-bottom:.8rem;
+  transition:background 2.5s,border-color 2.5s;
+}
+.msg-text{
+  font-size:clamp(.88rem,2.5vw,1.1rem);
+  color:#1a3a6b;line-height:1.8;font-style:italic;
+  font-family:'Playfair Display',serif;transition:color 2.5s;
+}
+
+/* ─── SLIDESHOW ─── */
+.slideshow-wrap{
+  width:100%;max-width:min(700px,92vw);
+  margin-bottom:.8rem;display:none;
+}
+.slideshow-box{
+  width:100%;
+  /* taller on mobile, cinematic on desktop */
+  aspect-ratio:16/10;
+  border-radius:20px;overflow:hidden;
+  position:relative;
+  border:2px solid rgba(116,172,223,.4);
+  background:#ddd;
+  transition:border-color 2.5s;
+}
+@media(max-width:500px){
+  .slideshow-box{aspect-ratio:4/3;}
+}
+.slide{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:flex-end;
+  opacity:0;transition:opacity .9s ease;
+}
+.slide.active{opacity:1;}
+.slide img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;object-position:center top;
+  border-radius:20px;
+}
+.slide-ov{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.6) 0%,rgba(0,0,0,.05) 50%,transparent 100%);
+  border-radius:20px;z-index:1;
+}
+.slide-cap{
+  position:relative;z-index:2;
+  padding:clamp(.6rem,2vw,.9rem) clamp(.8rem,3vw,1.3rem);
+  width:100%;text-align:center;
+}
+.slide-cap div{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(.8rem,2.2vw,1rem);
+  font-style:italic;color:rgba(255,255,255,.95);
+  line-height:1.4;text-shadow:0 1px 6px rgba(0,0,0,.7);
+}
+.slide-num{
+  position:absolute;top:.6rem;right:.8rem;z-index:3;
+  font-size:clamp(.58rem,1.5vw,.68rem);
+  color:rgba(255,255,255,.6);font-family:'Inter',sans-serif;
+  text-shadow:0 1px 3px rgba(0,0,0,.5);
+}
+.slide-arrows{
+  display:flex;justify-content:space-between;
+  position:absolute;top:50%;left:0;right:0;
+  transform:translateY(-50%);
+  pointer-events:none;padding:0 .6rem;z-index:5;
+}
+.slide-arr{
+  width:clamp(34px,7vw,46px);height:clamp(34px,7vw,46px);
+  border-radius:50%;
+  background:rgba(255,255,255,.82);border:none;cursor:pointer;
+  font-size:clamp(1rem,3vw,1.3rem);
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:all;
+  box-shadow:0 2px 10px rgba(0,0,0,.18);
+  transition:background .2s;
+}
+.slide-arr:hover{background:rgba(255,255,255,.97);}
+.slide-nav{
+  display:none;justify-content:center;
+  gap:.35rem;margin-top:.6rem;flex-wrap:wrap;
+  max-width:min(700px,92vw);
+}
+.slide-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(26,58,107,.22);
+  cursor:pointer;transition:background .3s,transform .3s;border:none;padding:0;
+}
+.slide-dot.on{background:#74ACDF;transform:scale(1.4);}
+
+/* ─── MUSIC ─── */
+.music-bar{
+  max-width:min(600px,90vw);width:100%;
+  background:rgba(255,255,255,.68);
+  border:1.5px solid rgba(116,172,223,.4);
+  border-radius:16px;
+  padding:clamp(.75rem,2.5vw,1rem) clamp(.9rem,3vw,1.3rem);
+  display:flex;align-items:center;gap:.9rem;
+  cursor:pointer;transition:background .2s,border-color 2.5s;
+  margin-bottom:.8rem;
+}
+.music-bar:hover{background:rgba(255,255,255,.9);}
+.mdisc{
+  width:clamp(38px,8vw,50px);height:clamp(38px,8vw,50px);
+  border-radius:50%;
+  background:linear-gradient(135deg,#74ACDF,#F6B40E);
+  display:flex;align-items:center;justify-content:center;
+  font-size:clamp(.9rem,2.5vw,1.15rem);flex-shrink:0;
+  animation:spin 4s linear infinite paused;transition:background 2.5s;
+}
+.mdisc.go{animation-play-state:running;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.minfo{flex:1;text-align:left;}
+.mttl{font-size:clamp(.8rem,2.2vw,.95rem);color:#1a3a6b;font-weight:600;transition:color 2.5s;}
+.mart{font-size:clamp(.67rem,1.8vw,.78rem);color:rgba(26,58,107,.5);transition:color 2.5s;}
+
+/* ─── FOOTER ─── */
+.note{
+  font-size:clamp(.76rem,2vw,.88rem);
+  color:#1a3a6b;max-width:340px;line-height:1.7;
+  font-style:italic;opacity:.82;transition:color 2.5s;
+}
+.by-tag{
+  margin-top:1rem;
+  font-family:'Dancing Script',cursive;
+  font-size:clamp(.95rem,2.5vw,1.15rem);
+  color:#1a3a6b;opacity:.42;transition:color 2.5s;
+}
+
+/* ─── CONFETTI / HEARTS ─── */
+.cf-layer{position:fixed;inset:0;pointer-events:none;z-index:50;}
+.cf{position:absolute;top:-20px;border-radius:2px;animation:cfFall var(--d) var(--dl) linear infinite;}
+@keyframes cfFall{0%{transform:translateY(0) rotateZ(0);opacity:1}100%{transform:translateY(115vh) rotateZ(720deg);opacity:0}}
+.hpop{position:fixed;pointer-events:none;font-size:1.4rem;z-index:60;animation:hUp 2.5s ease-out forwards;}
+@keyframes hUp{0%{transform:translateY(0) scale(0);opacity:1}50%{transform:translateY(-70px) scale(1.2);opacity:1}100%{transform:translateY(-140px) scale(.4);opacity:0}}
+
+/* ─── SPAIN MODE ─── */
+body.spain h1{color:#6b0010;}
+body.spain .subtitle{color:#6b0010;}
+body.spain .cbox{background:rgba(255,196,0,.3);border-color:rgba(198,11,30,.45);}
+body.spain .cbox::after{background:linear-gradient(90deg,#c60b1e,#ffc400,#c60b1e);}
+body.spain .cnum{color:#6b0010;}
+body.spain .clbl{color:#6b0010;}
+body.spain .prog-bg{border-color:rgba(198,11,30,.3);}
+body.spain .prog-fill{background:linear-gradient(90deg,#c60b1e,#ffc400);}
+body.spain .prog-labels{color:#6b0010;}
+body.spain .dot{border-color:rgba(198,11,30,.3);color:#6b0010;}
+body.spain .dot.passed{background:rgba(198,11,30,.18);border-color:rgba(198,11,30,.5);}
+body.spain .dot.today{background:#c60b1e;border-color:#6b0010;}
+body.spain .dot.arrival{background:linear-gradient(135deg,#c60b1e,#ffc400);}
+body.spain .divider-line{background:rgba(106,0,16,.2);}
+body.spain #fotoDiaBox{background:rgba(255,196,0,.22);border-color:rgba(198,11,30,.35);color:#6b0010;}
+body.spain .msg-card{background:rgba(255,255,255,.72);border-color:rgba(198,11,30,.35);}
+body.spain .msg-text{color:#3a0008;}
+body.spain .slideshow-wrap{display:block;}
+body.spain .slide-nav{display:flex;}
+body.spain .slideshow-box{border-color:rgba(198,11,30,.4);}
+body.spain .slide-dot{background:rgba(106,0,16,.22);}
+body.spain .slide-dot.on{background:#c60b1e;}
+body.spain .music-bar{border-color:rgba(198,11,30,.35);}
+body.spain .mdisc{background:linear-gradient(135deg,#c60b1e,#ffc400);}
+body.spain .mttl{color:#3a0008;}
+body.spain .mart{color:rgba(106,0,16,.5);}
+body.spain .note{color:#6b0010;}
+body.spain .by-tag{color:#6b0010;}
+
+/* ─── DESKTOP 2-COL for slideshow area ─── */
+@media(min-width:700px){
+  .bottom-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1rem;
+    width:100%;max-width:min(800px,95vw);
+    align-items:start;
+  }
+  .left-col,.right-col{display:flex;flex-direction:column;gap:.7rem;}
+  .bottom-grid .msg-card,.bottom-grid .music-bar{max-width:100%;margin-bottom:0;}
+}
+@media(max-width:699px){
+  .bottom-grid{display:flex;flex-direction:column;align-items:center;width:100%;}
+}
+</style>
+</head>
+<body>
+
+<div id="bgArg"></div>
+<div id="bgEsp"><div class="r"></div><div class="y"></div><div class="r"></div></div>
+<div class="cf-layer" id="cfLayer"></div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="flags-row"><span>🇦🇷</span><span class="arr">→</span><span>🇪🇸</span></div>
+  <h1>¡Maisa, te vas!</h1>
+  <p class="subtitle">Una nueva aventura te espera…</p>
+
+  <!-- SOL DE MAYO -->
+  <div id="sol">
+    <svg width="150" height="150" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="sg" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#FFD966"/><stop offset="100%" stop-color="#E8A020"/>
+        </radialGradient>
+      </defs>
+      <g transform="translate(100,100)">
+        <circle r="58" fill="#F6B40E" opacity=".13"/>
+        <g stroke="#C8962E" stroke-width="3.5" stroke-linecap="round">
+          <line x1="0" y1="-86" x2="0" y2="-62"/><line x1="0" y1="62" x2="0" y2="86"/>
+          <line x1="-86" y1="0" x2="-62" y2="0"/><line x1="62" y1="0" x2="86" y2="0"/>
+          <line x1="-61" y1="-61" x2="-44" y2="-44"/><line x1="44" y1="-44" x2="61" y2="-61"/>
+          <line x1="44" y1="44" x2="61" y2="61"/><line x1="-61" y1="61" x2="-44" y2="44"/>
+        </g>
+        <g stroke="#C8962E" stroke-width="3" fill="none" stroke-linecap="round">
+          <path d="M-22,-64 Q-11,-76 0,-66 Q11,-76 22,-64"/>
+          <path d="M-22,64 Q-11,76 0,66 Q11,76 22,66"/>
+          <path d="M-64,-22 Q-76,-11 -66,0 Q-76,11 -64,22"/>
+          <path d="M64,-22 Q76,-11 66,0 Q76,11 64,22"/>
+        </g>
+        <circle r="46" fill="url(#sg)" stroke="#C8962E" stroke-width="2"/>
+        <ellipse cx="-13" cy="-8" rx="5" ry="6" fill="#7B4F00"/>
+        <ellipse cx="13" cy="-8" rx="5" ry="6" fill="#7B4F00"/>
+        <circle cx="-11" cy="-9" r="1.8" fill="#fff" opacity=".5"/>
+        <circle cx="15" cy="-9" r="1.8" fill="#fff" opacity=".5"/>
+        <path d="M-19,-17 Q-13,-21 -7,-17" stroke="#7B4F00" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M7,-17 Q13,-21 19,-17" stroke="#7B4F00" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M0,-2 L-3,6 L3,6" stroke="#7B4F00" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M-14,16 Q0,28 14,16" stroke="#7B4F00" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <ellipse cx="-20" cy="10" rx="7" ry="4" fill="#E8703A" opacity=".25"/>
+        <ellipse cx="20" cy="10" rx="7" ry="4" fill="#E8703A" opacity=".25"/>
+      </g>
+      <g transform="translate(28,158) rotate(-20)">
+        <ellipse rx="9" ry="14" fill="#74ACDF" opacity=".7"/>
+        <ellipse rx="9" ry="14" fill="#74ACDF" opacity=".6" transform="rotate(60)"/>
+        <ellipse rx="9" ry="14" fill="#8EC6E6" opacity=".55" transform="rotate(120)"/>
+        <circle r="4" fill="#F6B40E" opacity=".9"/>
+      </g>
+      <g transform="translate(44,44) rotate(15)">
+        <ellipse rx="7" ry="12" fill="#5B9FCC" opacity=".65"/>
+        <ellipse rx="7" ry="12" fill="#74ACDF" opacity=".6" transform="rotate(72)"/>
+        <ellipse rx="7" ry="12" fill="#8EC6E6" opacity=".55" transform="rotate(144)"/>
+        <circle r="3.5" fill="#F6B40E" opacity=".9"/>
+      </g>
+      <g transform="translate(162,132) rotate(30)">
+        <ellipse rx="7" ry="11" fill="#74ACDF" opacity=".6"/>
+        <ellipse rx="7" ry="11" fill="#5B9FCC" opacity=".55" transform="rotate(90)"/>
+        <circle r="3.5" fill="#F6B40E" opacity=".85"/>
+      </g>
+      <path d="M55,152 Q40,137 55,122" stroke="#6BAF82" stroke-width="2" fill="none" opacity=".7" stroke-linecap="round"/>
+      <path d="M148,78 Q163,63 153,48" stroke="#6BAF82" stroke-width="2" fill="none" opacity=".6" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <!-- CONTADOR 4 colunas -->
+  <div class="counter-wrap">
+    <div class="cbox"><div class="cnum" id="dN">-</div><div class="clbl">Días</div></div>
+    <div class="cbox"><div class="cnum" id="hN">--</div><div class="clbl">Horas</div></div>
+    <div class="cbox"><div class="cnum" id="mN">--</div><div class="clbl">Minutos</div></div>
+    <div class="cbox"><div class="cnum" id="sN">--</div><div class="clbl">Segundos</div></div>
+  </div>
+
+  <!-- PROGRESSO -->
+  <div class="prog-wrap">
+    <div class="prog-bg"><div class="prog-fill" id="pFill" style="width:0%"></div></div>
+    <div class="prog-labels"><span id="startLbl">Hoy 🇦🇷</span><span id="pPct">0%</span><span>27 may ✈️</span></div>
+  </div>
+
+  <!-- DOTS -->
+  <div class="days-row" id="daysRow"></div>
+  <div id="fotoDiaWrap"><div id="fotoDiaBox"></div></div>
+
+  <!-- DIVIDER -->
+  <div class="divider"><div class="divider-line"></div><span class="divider-icon">🌺</span><div class="divider-line"></div></div>
+
+  <!-- SLIDESHOW (só dia 27) -->
+  <div class="slideshow-wrap" id="slideshowWrap">
+    <div class="slideshow-box" id="slideshowBox">
+      <div class="slide-arrows">
+        <button class="slide-arr" onclick="prevSlide()" aria-label="Anterior">‹</button>
+        <button class="slide-arr" onclick="nextSlide()" aria-label="Siguiente">›</button>
+      </div>
+    </div>
+    <div class="slide-nav" id="slideNav"></div>
+  </div>
+
+  <!-- BOTTOM GRID: mensagem + música (2 col desktop / 1 col mobile) -->
+  <div class="bottom-grid">
+    <div class="left-col">
+      <div class="msg-card">
+        <p class="msg-text">"Que España te reciba con los brazos abiertos, que cada calle de Madrid sea un descubrimiento, y que te lleves en la valija el amor de todos los que se quedan acá. ¡Vas a brillar, amiga! 🌺"</p>
+      </div>
+    </div>
+    <div class="right-col">
+      <div class="music-bar" onclick="toggleMusic()">
+        <div class="mdisc" id="mDisc">🎵</div>
+        <div class="minfo">
+          <div class="mttl" id="mttlEl">Una canción para Maisa 🎶</div>
+          <div class="mart" id="martEl">Tocá para escuchar ▶</div>
+        </div>
+      </div>
+      <p class="note">El hogar está donde está el corazón ❤️</p>
+      <p class="by-tag">by: sarang ✨</p>
+    </div>
+  </div>
+
+</div><!-- end .page -->
+
+<audio id="bgAudio" loop preload="none" src="audio/musica.mp3"></audio>
+
+<script>
+/* ── CONFIG ── */
+// Início: agora (relógio do dispositivo ao abrir)
+// Fim: 27/05/2025 às 00:00 hora local
+const endDate = new Date('2025-05-27T00:00:00');
+
+const CAPTIONS = [
+  '¡El comienzo de algo increíble!',
+  'De donde venís y siempre vas a volver',
+  '¡El gran viaje empieza!',
+  'Momentos que guardamos en el corazón',
+  'Distancia no rompe lo que es real',
+  'Las risas que nunca se olvidan',
+  'Por cada sueño que vas a cumplir',
+  'Madrid te espera con los brazos abiertos',
+  'Cada amanecer es una aventura nueva',
+  'Los mejores recuerdos siempre con vos',
+  'Porque en España también se baila bien',
+  'El mundo es tuyo, Maisa',
+  'La buena vida te espera',
+  'Vas a enamorarte de cada rincón',
+  'Llegás en la mejor estación',
+  'El capítulo más emocionante empieza hoy',
+  'Siempre va a sonar cuando nos extrañemos',
+  'Cada palabra viene del corazón',
+  'Vas a crecer de maneras increíbles',
+  'Argentino-española, lo mejor de dos mundos',
+  '¡Hoy es el día que soñaste!',
+  'Donde vayas vas a brillar',
+  'España ya es un poco tuyo',
+  'Empacaste sueños, no solo ropa',
+  'Por la persona hermosa que sos',
+  'Más cerca que nunca de todo lo que querés',
+  'Nada te detiene, nunca',
+  'La vida en España va a ser llena de luz',
+  'Desde acá, siempre',
+  '¡Buen viaje, Maisa! Con todo el amor del mundo',
+  'Juntas en cada momento especial',
+  'Estos recuerdos son para siempre',
+  'Todo lo que vivimos juntas',
+  'La mejor compañía siempre',
+  'Momentos únicos que no se olvidan',
+  'Con todo el amor del mundo',
+  '¡Qué aventura tan linda nos espera!',
+  'Hasta pronto, amiga del alma',
+];
+
+/* ── PHOTO COUNT PER DAY ── */
+function getTodayPhotoCount(now) {
+  const y=now.getFullYear(), m=now.getMonth()+1, d=now.getDate();
+  if (y>2025||(y===2025&&m>5)||(y===2025&&m===5&&d>=27)) return 38;
+  if (y===2025&&m===5&&d===26) return 5;
+  if (y===2025&&m===5&&d===25) return 4;
+  if (y===2025&&m===5&&d===24) return 3;
+  if (y===2025&&m===5&&d===23) return 2;
+  if (y===2025&&m===5&&d===22) return 1;
+  return 0;
+}
+
+/* ── DOTS ── */
+// Build days dynamically: from today up to 27
+function buildDots(now) {
+  const row = document.getElementById('daysRow');
+  row.innerHTML = '';
+  const today = now.getDate();
+  const startDay = Math.max(22, today); // show from today (min 22) to 27
+  const emojis = ['🌙','⭐','🌸','🎵','🧳','🌺'];
+  for (let d = startDay <= 27 ? startDay : 27; d <= 27; d++) {
+    const el = document.createElement('div');
+    el.className = 'dot';
+    if (d === 27) {
+      el.classList.add('arrival');
+      el.innerHTML = '<span class="dn">27</span><span class="de">✈️</span>';
+    } else if (d < today) {
+      el.classList.add('passed');
+      el.innerHTML = '<span class="dn">'+d+'</span><span class="de">✓</span>';
+    } else if (d === today) {
+      el.classList.add('today');
+      el.innerHTML = '<span class="dn">'+d+'</span><span class="de">📍</span>';
+    } else {
+      el.innerHTML = '<span class="dn">'+d+'</span><span class="de">'+emojis[(d-22)%emojis.length]+'</span>';
+    }
+    row.appendChild(el);
+  }
+}
+
+/* ── SLIDESHOW ── */
+let currentSlide = 0, slideTimer = null;
+
+function buildSlideshow(photoCount) {
+  const box = document.getElementById('slideshowBox');
+  const nav = document.getElementById('slideNav');
+  Array.from(box.querySelectorAll('.slide')).forEach(s => s.remove());
+  nav.innerHTML = '';
+  currentSlide = 0;
+
+  for (let i = 0; i < photoCount; i++) {
+    const n = String(i+1).padStart(2,'0');
+    const div = document.createElement('div');
+    div.className = 'slide' + (i===0?' active':'');
+
+    const img = document.createElement('img');
+    img.src = 'fotos/foto'+n+'.jpg';
+    img.alt = 'Foto '+(i+1);
+    img.loading = i < 3 ? 'eager' : 'lazy';
+    div.appendChild(img);
+
+    const ov = document.createElement('div'); ov.className='slide-ov'; div.appendChild(ov);
+
+    const cap = document.createElement('div'); cap.className='slide-cap';
+    cap.innerHTML = '<div>'+(CAPTIONS[i]||'¡Te queremos, Maisa!')+'</div>';
+    div.appendChild(cap);
+
+    const num = document.createElement('div'); num.className='slide-num';
+    num.textContent = (i+1)+' / '+photoCount;
+    div.appendChild(num);
+
+    box.appendChild(div);
+
+    const dot = document.createElement('button');
+    dot.className = 'slide-dot'+(i===0?' on':'');
+    dot.setAttribute('aria-label','Foto '+(i+1));
+    dot.onclick = (function(idx){return function(){goSlide(idx);};})(i);
+    nav.appendChild(dot);
+  }
+
+  if (slideTimer) clearInterval(slideTimer);
+  slideTimer = setInterval(nextSlide, 5000);
+}
+
+function goSlide(n) {
+  const slides = document.querySelectorAll('.slide');
+  const dots   = document.querySelectorAll('.slide-dot');
+  if (!slides.length) return;
+  slides[currentSlide].classList.remove('active');
+  dots[currentSlide].classList.remove('on');
+  currentSlide = (n + slides.length) % slides.length;
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].classList.add('on');
+}
+function nextSlide(){goSlide(currentSlide+1);}
+function prevSlide(){goSlide(currentSlide-1);}
+
+// swipe support
+(function(){
+  let sx=0;
+  const box = document.getElementById('slideshowBox');
+  box.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
+  box.addEventListener('touchend',function(e){
+    const dx=e.changedTouches[0].clientX-sx;
+    if(Math.abs(dx)>40){dx<0?nextSlide():prevSlide();}
+  },{passive:true});
+})();
+
+/* ── SPAIN ── */
+let spainMode=false;
+function activateSpain(){
+  if(spainMode)return; spainMode=true;
+  document.body.classList.add('spain');
+  document.getElementById('bgArg').style.opacity='0';
+  const esp=document.getElementById('bgEsp');
+  esp.style.opacity='1'; esp.style.pointerEvents='auto';
+  document.getElementById('sol').style.opacity='0';
+  buildSlideshow(38);
+  launchConfetti(); launchHearts();
+}
+function launchConfetti(){
+  const layer=document.getElementById('cfLayer');
+  const cols=['#c60b1e','#ffc400','#fff','#ff6b6b','#ffe066','#74ACDF'];
+  for(let i=0;i<90;i++){
+    const c=document.createElement('div'); c.className='cf';
+    const col=cols[i%cols.length],w=Math.random()*9+4,h=Math.random()*14+4;
+    c.style.cssText='left:'+Math.random()*100+'%;width:'+w+'px;height:'+h+'px;background:'+col+';border-radius:'+(Math.random()>.5?'50%':'3px')+';--d:'+(Math.random()*3+2).toFixed(1)+'s;--dl:'+(Math.random()*2.5).toFixed(1)+'s';
+    layer.appendChild(c);
+  }
+}
+function launchHearts(){
+  const items=['❤️','💛','🌺','⭐','🥂','🎉','💃','🌟','🎊'];
+  let cnt=0;
+  const iv=setInterval(function(){
+    if(cnt++>40){clearInterval(iv);return;}
+    const h=document.createElement('div'); h.className='hpop';
+    h.textContent=items[Math.floor(Math.random()*items.length)];
+    h.style.cssText='left:'+(Math.random()*88+5)+'%;bottom:'+(Math.random()*25+5)+'%;animation-delay:'+(Math.random()*0.5)+'s';
+    document.body.appendChild(h);
+    setTimeout(function(){h.remove();},3000);
+  },220);
+}
+
+/* ── MUSIC ── */
+let musicOn=false;
+function toggleMusic(){
+  const disc=document.getElementById('mDisc');
+  const aud=document.getElementById('bgAudio');
+  if(!musicOn){
+    aud.play().then(function(){
+      disc.classList.add('go');
+      document.getElementById('mttlEl').textContent='San Juan por mi sangre ♫';
+      document.getElementById('martEl').textContent='Intihuama · tocando... ❚❚';
+      musicOn=true;
+    }).catch(function(){
+      // fallback: try reloading
+      aud.load(); aud.play();
+      disc.classList.add('go'); musicOn=true;
+    });
+  } else {
+    aud.pause();
+    disc.classList.remove('go');
+    document.getElementById('martEl').textContent='Tocá para escuchar ▶';
+    musicOn=false;
+  }
+}
+
+/* ── TICK (relógio do dispositivo) ── */
+function tick(){
+  const now = new Date(); // usa data/hora do celular
+  const rem = endDate - now;
+
+  buildDots(now);
+
+  if(rem<=0){
+    activateSpain();
+    document.getElementById('dN').textContent='0';
+    document.getElementById('hN').textContent='00';
+    document.getElementById('mN').textContent='00';
+    document.getElementById('sN').textContent='00';
+    document.getElementById('pFill').style.width='100%';
+    document.getElementById('pPct').textContent='100%';
+    document.getElementById('fotoDiaWrap').style.display='none';
+    return;
+  }
+
+  // progresso: % do dia atual em relação ao total de dias até 27
+  // começa de hoje até o dia 27 (progride 1 dia = 1 clique no progresso)
+  const startDay = now.getDate();
+  const totalDays = Math.max(1, 27 - startDay); // dias faltando a partir de hoje
+  const daysGone  = 0; // hoje é o ponto de partida, progresso aumenta a cada dia
+  // Use time-based progress within the current day too
+  const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const endOfRange   = endDate;
+  const startOfRange = startOfToday;
+  // We want: on day X, progress = (X - startDay) / totalDays * 100
+  // But we also animate within the day using elapsed seconds
+  const totalSecs = (endOfRange - startOfRange) / 1000;
+  const elapsedSecs = (now - startOfRange) / 1000;
+  const pct = Math.min(100, Math.max(0, elapsedSecs / totalSecs * 100));
+  document.getElementById('pFill').style.width = pct.toFixed(2)+'%';
+  document.getElementById('pPct').textContent = Math.floor(pct)+'%';
+
+  // foto do dia
+  const photoCount = getTodayPhotoCount(now);
+  const wrap = document.getElementById('fotoDiaWrap');
+  const fbox = document.getElementById('fotoDiaBox');
+  if(photoCount>0&&photoCount<38){
+    wrap.style.display='block';
+    fbox.textContent='📸 '+photoCount+' de 5 fotos desbloqueadas hoy!';
+  } else {
+    wrap.style.display='none';
+  }
+
+  const ts = Math.floor(rem/1000);
+  document.getElementById('dN').textContent = Math.floor(ts/86400);
+  document.getElementById('hN').textContent = String(Math.floor((ts%86400)/3600)).padStart(2,'0');
+  document.getElementById('mN').textContent = String(Math.floor((ts%3600)/60)).padStart(2,'0');
+  document.getElementById('sN').textContent = String(ts%60).padStart(2,'0');
+}
+
+tick();
+setInterval(tick, 1000);
+</script>
+</body>
+</html>
