@@ -3,703 +3,213 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Maisa em Madrid 🇪🇸</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-
-/* ===================================================== */
 /* RESET */
-/* ===================================================== */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Montserrat',sans-serif;overflow-x:hidden;background:#ffc400;color:#4d0010;}
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+/* BACKGROUND ESPANHA */
+.bg-spain{position:fixed;inset:0;z-index:-3;background:linear-gradient(to bottom,#c60b1e 0%,#c60b1e 25%,#ffc400 25%,#ffc400 75%,#c60b1e 75%,#c60b1e 100%);}
 
-body{
-  font-family:'Montserrat',sans-serif;
-  overflow-x:hidden;
-  background:#ffc400;
-  color:#4d0010;
-}
-
-/* ===================================================== */
-/* FUNDO ESPANHA */
-/* ===================================================== */
-
-.bg-spain{
-  position:fixed;
-  inset:0;
-  z-index:-3;
-  background:
-  linear-gradient(
-    to bottom,
-    #c60b1e 0%,
-    #c60b1e 24%,
-    #ffc400 24%,
-    #ffc400 76%,
-    #c60b1e 76%,
-    #c60b1e 100%
-  );
-}
-
-/* ===================================================== */
-/* CONFETTI */
-/* ===================================================== */
-
-.confetti{
-  position:fixed;
-  inset:0;
-  overflow:hidden;
-  pointer-events:none;
-  z-index:-1;
-}
-
-.confetti span{
-  position:absolute;
-  top:-20px;
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  animation:fall linear infinite;
-}
-
-@keyframes fall{
-
-  from{
-    transform:translateY(-10vh) rotate(0deg);
-  }
-
-  to{
-    transform:translateY(110vh) rotate(720deg);
-  }
-
-}
-
-/* ===================================================== */
 /* PAGE */
-/* ===================================================== */
+.page{width:100%;max-width:1200px;margin:auto;padding:2rem 1rem 5rem;}
 
-.page{
-  width:100%;
-  max-width:1200px;
-  margin:auto;
-  padding:2rem 1rem 5rem;
-}
+/* HERO */
+.hero{text-align:center;margin-bottom:3rem;}
+.flags{font-size:3rem;margin-bottom:1rem;}
+h1{font-size:4rem;font-family:'Cormorant Garamond',serif;color:white;text-shadow:0 8px 30px rgba(0,0,0,.2);}
+.subtitle{color:white;font-size:1.2rem;margin-top:.5rem;}
 
-/* ===================================================== */
-/* HEADER */
-/* ===================================================== */
+/* COUNTER */
+.counter{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin:3rem 0;}
+.counter-box{width:160px;padding:1.5rem;border-radius:25px;background:rgba(255,255,255,.2);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.35);text-align:center;box-shadow:0 15px 40px rgba(0,0,0,.15);}
+.counter-number{font-size:3rem;color:white;font-weight:700;font-family:'Cormorant Garamond',serif;}
+.counter-label{color:white;letter-spacing:3px;font-size:.8rem;margin-top:.5rem;}
 
-.hero{
-  text-align:center;
-  margin-bottom:3rem;
-}
+/* MUSIC BUTTON */
+.music-bar{max-width:200px;margin:2rem auto;display:flex;align-items:center;justify-content:center;gap:.8rem;padding:.8rem 1rem;border-radius:20px;background:rgba(255,255,255,.2);cursor:pointer;transition:.25s;box-shadow:0 8px 20px rgba(0,0,0,.15);}
+.music-bar:hover{background:rgba(255,255,255,.35);}
+.mdisc{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#74ACDF,#F6B40E);display:flex;align-items:center;justify-content:center;font-size:1.2rem;animation:spin 4s linear infinite paused;}
+.mdisc.go{animation-play-state:running;}
+.minfo{text-align:left;}
+.mttl{color:white;font-weight:600;}
+.mart{color:rgba(255,255,255,.75);font-size:.85rem;}
+@keyframes spin{to{transform:rotate(360deg);}}
 
-.flags{
-  font-size:3rem;
-  margin-bottom:1rem;
-}
+/* SLIDESHOW */
+.slideshow{max-width:900px;margin:3rem auto;position:relative;}
+.slide{display:none;position:relative;}
+.slide.active{display:block;}
+.slide img{width:100%;height:600px;object-fit:cover;border-radius:20px;}
+.slide-cap{position:absolute;bottom:0;width:100%;background:linear-gradient(to top,rgba(0,0,0,.7),transparent);color:white;padding:1rem;font-family:'Cormorant Garamond',serif;font-size:1.1rem;}
+.slide-nav{display:flex;justify-content:center;gap:.5rem;margin-top:.5rem;}
+.slide-dot{width:12px;height:12px;border-radius:50%;background:white;opacity:.5;cursor:pointer;}
+.slide-dot.on{opacity:1;background:#74ACDF;}
 
-h1{
-  font-size:5rem;
-  font-family:'Cormorant Garamond',serif;
-  color:white;
-  text-shadow:0 8px 30px rgba(0,0,0,.2);
-}
-
-.subtitle{
-  color:white;
-  font-size:1.2rem;
-  margin-top:.5rem;
-}
-
-/* ===================================================== */
-/* COUNTER FINAL */
-/* ===================================================== */
-
-.counter{
-  display:flex;
-  justify-content:center;
-  gap:1rem;
-  flex-wrap:wrap;
-  margin:3rem 0;
-}
-
-.counter-box{
-  width:180px;
-  padding:1.8rem;
-  border-radius:30px;
-  background:rgba(255,255,255,.2);
-  backdrop-filter:blur(12px);
-  border:1px solid rgba(255,255,255,.35);
-  text-align:center;
-  box-shadow:0 15px 40px rgba(0,0,0,.15);
-}
-
-.counter-number{
-  font-size:4rem;
-  color:white;
-  font-weight:700;
-  font-family:'Cormorant Garamond',serif;
-}
-
-.counter-label{
-  color:white;
-  letter-spacing:3px;
-  font-size:.8rem;
-  margin-top:.5rem;
-}
-
-/* ===================================================== */
-/* STATUS */
-/* ===================================================== */
-
-.status{
-  text-align:center;
-  margin-bottom:3rem;
-}
-
-.status-bar{
-  width:100%;
-  max-width:800px;
-  margin:auto;
-  height:12px;
-  background:rgba(255,255,255,.3);
-  border-radius:999px;
-  overflow:hidden;
-}
-
-.status-fill{
-  width:100%;
-  height:100%;
-  background:white;
-}
-
-.status-text{
-  display:flex;
-  justify-content:space-between;
-  margin-top:1rem;
-  color:white;
-}
-
-/* ===================================================== */
-/* DAYS */
-/* ===================================================== */
-
-.days{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:1rem;
-  margin-bottom:4rem;
-}
-
-.ball{
-  width:80px;
-  height:80px;
-  border-radius:50%;
-  background:white;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  font-weight:700;
-  box-shadow:0 10px 30px rgba(0,0,0,.15);
-}
-
-.ball.final{
-  background:#c60b1e;
-  color:white;
-}
-
-.line{
-  width:50px;
-  height:5px;
-  border-radius:999px;
-  background:white;
-}
-
-/* ===================================================== */
-/* MESSAGE */
-/* ===================================================== */
-
-.message{
-  max-width:850px;
-  margin:0 auto 4rem;
-  background:rgba(255,255,255,.22);
-  border:1px solid rgba(255,255,255,.3);
-  backdrop-filter:blur(10px);
-  border-radius:35px;
-  padding:2.5rem;
-  color:white;
-  font-size:1.2rem;
-  line-height:2;
-  text-align:center;
-  box-shadow:0 20px 40px rgba(0,0,0,.12);
-}
-
-/* ===================================================== */
-/* GALLERY */
-/* ===================================================== */
-
-.gallery-title{
-  text-align:center;
-  color:white;
-  font-size:3rem;
-  margin-bottom:2rem;
-  font-family:'Cormorant Garamond',serif;
-}
-
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:1.5rem;
-  margin-bottom:5rem;
-}
-
-.photo{
-  position:relative;
-  overflow:hidden;
-  border-radius:28px;
-  box-shadow:0 20px 40px rgba(0,0,0,.2);
-  background:black;
-}
-
-.photo img{
-  width:100%;
-  height:400px;
-  object-fit:cover;
-  transition:.5s;
-}
-
-.photo:hover img{
-  transform:scale(1.05);
-}
-
-.caption{
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  padding:1rem;
-  background:linear-gradient(to top,rgba(0,0,0,.8),transparent);
-  color:white;
-  font-size:1rem;
-}
-
-/* ===================================================== */
 /* GUIDE */
-/* ===================================================== */
+.madrid-guide{background:rgba(255,255,255,.9);border-radius:35px;padding:3rem;box-shadow:0 20px 50px rgba(0,0,0,.15);margin-top:4rem;}
+.guide-title{text-align:center;font-size:3rem;margin-bottom:3rem;font-family:'Cormorant Garamond',serif;color:#a10016;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;}
+.card{background:white;border-radius:28px;padding:1.5rem;box-shadow:0 10px 30px rgba(0,0,0,.08);}
+.card h3{margin-bottom:1rem;color:#a10016;font-size:1.3rem;}
+.card a{display:block;padding:.8rem 1rem;border-radius:18px;text-decoration:none;color:#17345f;background:#fff7e2;margin-bottom:.7rem;transition:.25s;}
+.card a:hover{transform:translateY(-3px);background:#ffe8a3;}
 
-.guide{
-  background:rgba(255,255,255,.92);
-  border-radius:40px;
-  padding:3rem;
-  box-shadow:0 20px 50px rgba(0,0,0,.15);
-}
-
-.guide-title{
-  text-align:center;
-  font-size:4rem;
-  margin-bottom:3rem;
-  font-family:'Cormorant Garamond',serif;
-  color:#a10016;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-  gap:2rem;
-}
-
-.card{
-  background:white;
-  border-radius:28px;
-  padding:1.5rem;
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
-}
-
-.card h3{
-  margin-bottom:1rem;
-  color:#a10016;
-  font-size:1.3rem;
-}
-
-.card a{
-  display:block;
-  padding:1rem;
-  border-radius:18px;
-  text-decoration:none;
-  color:#17345f;
-  background:#fff7e2;
-  margin-bottom:.7rem;
-  transition:.25s;
-}
-
-.card a:hover{
-  transform:translateY(-4px);
-  background:#ffe8a3;
-}
-
-/* ===================================================== */
 /* FOOTER */
-/* ===================================================== */
+.footer{text-align:center;color:white;margin-top:4rem;font-size:1rem;}
 
-.footer{
-  margin-top:4rem;
-  text-align:center;
-  color:white;
-  font-size:1rem;
-}
-
-/* ===================================================== */
 /* MOBILE */
-/* ===================================================== */
-
 @media(max-width:700px){
-
-  h1{
-    font-size:3rem;
-  }
-
-  .guide{
-    padding:1.5rem;
-  }
-
-  .guide-title{
-    font-size:2.5rem;
-  }
-
-  .photo img{
-    height:280px;
-  }
-
+  h1{font-size:2.8rem;}
+  .slide img{height:350px;}
 }
-
 </style>
 </head>
-
-<body>
+<body class="spain">
 
 <div class="bg-spain"></div>
-
-<!-- CONFETTI -->
-
-<div class="confetti">
-
-  <span style="left:10%;background:#fff;animation-duration:5s;"></span>
-  <span style="left:20%;background:#c60b1e;animation-duration:7s;"></span>
-  <span style="left:30%;background:#fff;animation-duration:6s;"></span>
-  <span style="left:40%;background:#c60b1e;animation-duration:8s;"></span>
-  <span style="left:50%;background:#fff;animation-duration:5s;"></span>
-  <span style="left:60%;background:#c60b1e;animation-duration:7s;"></span>
-  <span style="left:70%;background:#fff;animation-duration:6s;"></span>
-  <span style="left:80%;background:#c60b1e;animation-duration:8s;"></span>
-  <span style="left:90%;background:#fff;animation-duration:5s;"></span>
-
-</div>
 
 <div class="page">
 
 <!-- HERO -->
-
 <div class="hero">
-
-  <div class="flags">
-    🇦🇷 ✈️ 🇪🇸
-  </div>
-
+  <div class="flags">🇦🇷 ✈️ 🇪🇸</div>
   <h1>Bienvenida a Madrid ✨</h1>
-
-  <p class="subtitle">
-    Tu nueva aventura empieza ahora ❤️
-  </p>
-
+  <p class="subtitle">Tu nueva aventura empieza ahora ❤️</p>
 </div>
 
-<!-- COUNTER -->
-
+<!-- COUNTER FINAL -->
 <div class="counter">
-
-  <div class="counter-box">
-    <div class="counter-number">00</div>
-    <div class="counter-label">DIAS</div>
-  </div>
-
-  <div class="counter-box">
-    <div class="counter-number">00</div>
-    <div class="counter-label">HORAS</div>
-  </div>
-
-  <div class="counter-box">
-    <div class="counter-number">00</div>
-    <div class="counter-label">MINUTOS</div>
-  </div>
-
-  <div class="counter-box">
-    <div class="counter-number">00</div>
-    <div class="counter-label">SEGUNDOS</div>
-  </div>
-
+  <div class="counter-box"><div class="counter-number">00</div><div class="counter-label">DIAS</div></div>
+  <div class="counter-box"><div class="counter-number">00</div><div class="counter-label">HORAS</div></div>
+  <div class="counter-box"><div class="counter-number">00</div><div class="counter-label">MINUTOS</div></div>
+  <div class="counter-box"><div class="counter-number">00</div><div class="counter-label">SEGUNDOS</div></div>
 </div>
 
-<!-- STATUS -->
-
-<div class="status">
-
-  <div class="status-bar">
-    <div class="status-fill"></div>
+<!-- MUSIC BUTTON -->
+<div class="music-bar" onclick="toggleMusic()">
+  <div class="mdisc" id="mDisc">🎵</div>
+  <div class="minfo">
+    <div class="mttl">Uma música especial 🎶</div>
+    <div class="mart">Toque para ouvir ▶</div>
   </div>
-
-  <div class="status-text">
-    <span>Argentina 🇦🇷</span>
-    <span>100%</span>
-    <span>España 🇪🇸</span>
-  </div>
-
 </div>
+<audio id="bgAudio" loop preload="none" src="audio/musica.mp3"></audio>
 
-<!-- DAYS -->
-
-<div class="days">
-
-  <div class="ball">
-    <div>25</div>
-    <small>✅</small>
+<!-- SLIDESHOW -->
+<div class="slideshow" id="slideshowWrap">
+  <div class="slider" id="sliderBox">
+    <!-- Slides serão gerados pelo JS -->
   </div>
-
-  <div class="line"></div>
-
-  <div class="ball">
-    <div>26</div>
-    <small>✅</small>
-  </div>
-
-  <div class="line"></div>
-
-  <div class="ball final">
-    <div>27</div>
-    <small>🇪🇸</small>
-  </div>
-
+  <div class="slide-nav" id="slideNav"></div>
 </div>
 
 <!-- MESSAGE -->
+<div class="message">“Madrid agora também é sua casa ❤️🇪🇸 Que cada rua, cada café e cada pôr do sol virem memórias inesquecíveis.”</div>
 
-<div class="message">
-
-“Madrid agora também é sua casa ❤️🇪🇸
-Que cada rua, cada café e cada pôr do sol
-virem memórias inesquecíveis.”
-
-</div>
-
-<!-- GALLERY -->
-
-<div class="gallery-title">
-  📸 Memórias desbloqueadas
-</div>
-
-<div class="gallery">
-
-  <div class="photo">
-    <img src="fotos/foto01.jpg">
-    <div class="caption">
-      ✨ O começo de tudo
-    </div>
-  </div>
-
-  <div class="photo">
-    <img src="fotos/foto02.jpg">
-    <div class="caption">
-      ❤️ Vocês sempre juntos
-    </div>
-  </div>
-
-  <div class="photo">
-    <img src="fotos/foto03.jpg">
-    <div class="caption">
-      🇪🇸 Madrid te espera
-    </div>
-  </div>
-
-  <div class="photo">
-    <img src="fotos/foto04.jpg">
-    <div class="caption">
-      🌎 O mundo é seu
-    </div>
-  </div>
-
-</div>
-
-<!-- GUIDE -->
-
-<div class="guide">
-
-  <div class="guide-title">
-    🇪🇸 Guía Especial de Madrid
-  </div>
-
+<!-- GUIA -->
+<div class="madrid-guide">
+  <div class="guide-title">🇪🇸 Guía Especial de Madrid</div>
   <div class="grid">
 
     <!-- BARES -->
-
     <div class="card">
-
       <h3>🍷 Bares & Nightlife</h3>
-
-      <a href="#">
-        🍸 Lovo Cocktail Bar Madrid
-      </a>
-
-      <a href="#">
-        ✨ La Santoría Cocktail Bar
-      </a>
-
-      <a href="#">
-        🎶 Calle 365 Discoteca Madrid
-      </a>
-
-      <a href="#">
-        🥃 1862 Dry Bar
-      </a>
-
-      <a href="#">
-        🌟 Salmon Guru
-      </a>
-
+      <a href="#">🍸 Lovo Cocktail Bar Madrid</a>
+      <a href="#">✨ La Santoría Cocktail Bar</a>
+      <a href="#">🎶 Calle 365 Discoteca Madrid</a>
+      <a href="#">🥃 1862 Dry Bar</a>
+      <a href="#">🌟 Salmon Guru</a>
     </div>
 
     <!-- RESTAURANTES -->
-
     <div class="card">
-
       <h3>🍽️ Restaurantes</h3>
-
-      <a href="#">
-        🍷 Inclan Brutal Bar
-      </a>
-
-      <a href="#">
-        📸 Rosi La Loca
-      </a>
-
-      <a href="#">
-        🦐 Los Montes de Galicia
-      </a>
-
-      <a href="#">
-        ✨ Ástor Gastro-place
-      </a>
-
-      <a href="#">
-        ⭐ CEBO Madrid
-      </a>
-
+      <a href="#">🍷 Inclan Brutal Bar</a>
+      <a href="#">📸 Rosi La Loca</a>
+      <a href="#">🦐 Los Montes de Galicia</a>
+      <a href="#">✨ Ástor Gastro-place</a>
+      <a href="#">⭐ CEBO Madrid</a>
     </div>
 
     <!-- CAFÉS -->
-
     <div class="card">
-
       <h3>☕ Cafés & Brunch</h3>
-
-      <a href="#">
-        ☕ Federal Café
-      </a>
-
-      <a href="#">
-        🍰 HanSo Café
-      </a>
-
-      <a href="#">
-        🏛️ Café de Oriente
-      </a>
-
+      <a href="#">☕ Federal Café</a>
+      <a href="#">🍰 HanSo Café</a>
+      <a href="#">🏛️ Café de Oriente</a>
     </div>
 
     <!-- TURISMO -->
-
     <div class="card">
-
       <h3>🏛️ Lugares imperdíveis</h3>
-
-      <a href="#">
-        👑 Palacio Real de Madrid
-      </a>
-
-      <a href="#">
-        🌅 Templo de Debod
-      </a>
-
-      <a href="#">
-        🌆 Gran Vía
-      </a>
-
-      <a href="#">
-        🎨 Museo del Prado
-      </a>
-
+      <a href="#">👑 Palacio Real</a>
+      <a href="#">🌅 Templo de Debod</a>
+      <a href="#">🌆 Gran Vía</a>
+      <a href="#">🎨 Museo del Prado</a>
     </div>
 
-    <!-- METRO -->
-
+    <!-- METRÔ -->
     <div class="card">
-
       <h3>🚇 Metro de Madrid</h3>
-
-      <a href="#">
-        🚇 Metro Oficial
-      </a>
-
-      <a href="#">
-        🗺️ Mapa do metrô
-      </a>
-
-      <a href="#">
-        🇪🇸 Turismo Madrid
-      </a>
-
-    </div>
-
-    <!-- EXTRAS -->
-
-    <div class="card">
-
-      <h3>🌇 Dicas extras</h3>
-
-      <a href="#">
-        🌅 Ver o pôr do sol no Templo de Debod
-      </a>
-
-      <a href="#">
-        🍷 Fazer tapas em La Latina
-      </a>
-
-      <a href="#">
-        🏙️ RIU Plaza España Rooftop
-      </a>
-
+      <a href="#">🚇 Metro Oficial</a>
+      <a href="#">🗺️ Mapa do metrô</a>
+      <a href="#">🇪🇸 Turismo Madrid</a>
     </div>
 
   </div>
+</div>
+
+<div class="footer">❤️ Aproveite cada momento em Madrid ✨</div>
 
 </div>
 
-<!-- FOOTER -->
+<script>
+/* MUSIC */
+let musicOn=false;
+function toggleMusic(){
+  const disc=document.getElementById('mDisc');
+  const aud=document.getElementById('bgAudio');
+  if(!musicOn){
+    aud.play().then(()=>{disc.classList.add('go');musicOn=true;}).catch(()=>{aud.load(); aud.play(); disc.classList.add('go'); musicOn=true;});
+  }else{
+    aud.pause(); disc.classList.remove('go'); musicOn=false;
+  }
+}
 
-<div class="footer">
-
-  ❤️ Aproveite cada momento em Madrid ✨
-
-</div>
-
-</div>
+/* SLIDESHOW */
+const SLIDES = 12; // número de fotos disponíveis
+let currentSlide = 0;
+function buildSlideshow(){
+  const box=document.getElementById('sliderBox');
+  const nav=document.getElementById('slideNav');
+  box.innerHTML=''; nav.innerHTML='';
+  for(let i=1;i<=SLIDES;i++){
+    const div=document.createElement('div'); div.className='slide'+(i===1?' active':'');
+    const img=document.createElement('img'); img.src=`fotos/foto${String(i).padStart(2,'0')}.jpg`;
+    div.appendChild(img);
+    const cap=document.createElement('div'); cap.className='slide-cap'; cap.textContent=`Foto ${i} de ${SLIDES}`;
+    div.appendChild(cap);
+    box.appendChild(div);
+    const dot=document.createElement('button'); dot.className='slide-dot'+(i===1?' on':''); dot.onclick=((idx)=>()=>goSlide(idx))(i-1);
+    nav.appendChild(dot);
+  }
+}
+function goSlide(n){
+  const slides=document.querySelectorAll('.slide');
+  const dots=document.querySelectorAll('.slide-dot');
+  slides[currentSlide].classList.remove('active'); dots[currentSlide].classList.remove('on');
+  currentSlide=(n+slides.length)%slides.length;
+  slides[currentSlide].classList.add('active'); dots[currentSlide].classList.add('on');
+}
+function nextSlide(){goSlide(currentSlide+1);}
+setInterval(nextSlide,4000);
+buildSlideshow();
+</script>
 
 </body>
 </html>
