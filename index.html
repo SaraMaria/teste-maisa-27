@@ -223,33 +223,6 @@ h1{
 }
 
 /* ===================================================== */
-/* MUSIC PLAYER */
-/* ===================================================== */
-
-.music-player{
-  margin:2rem auto;
-  display:flex;
-  justify-content:center;
-}
-
-.music-player button{
-  border:none;
-  padding:1rem 2rem;
-  border-radius:999px;
-  background:linear-gradient(135deg,#17345f,#74ACDF);
-  color:white;
-  font-size:1rem;
-  font-weight:600;
-  cursor:pointer;
-  transition:.3s;
-  box-shadow:0 10px 25px rgba(0,0,0,.15);
-}
-
-.music-player button:hover{
-  transform:translateY(-3px) scale(1.03);
-}
-
-/* ===================================================== */
 /* LOCKED GALLERY */
 /* ===================================================== */
 
@@ -311,16 +284,14 @@ body.spain .slideshow{
 
 .slider{
   position:relative;
-  max-width:950px;
+  max-width:900px;
   margin:auto;
   overflow:hidden;
   border-radius:30px;
-  background:black;
 }
 
 .slide{
   display:none;
-  animation:fade .8s ease;
 }
 
 .slide.active{
@@ -329,7 +300,7 @@ body.spain .slideshow{
 
 .slide img{
   width:100%;
-  height:700px;
+  height:650px;
   object-fit:contain;
   background:black;
 }
@@ -338,17 +309,6 @@ body.spain .slideshow{
   background:rgba(0,0,0,.75);
   color:white;
   padding:1rem;
-}
-
-@keyframes fade{
-  from{
-    opacity:0;
-    transform:scale(1.01);
-  }
-  to{
-    opacity:1;
-    transform:scale(1);
-  }
 }
 
 /* ===================================================== */
@@ -386,14 +346,12 @@ body.spain .madrid-guide{
 }
 
 .guide-category a{
-  display:flex;
-  align-items:center;
-  gap:1rem;
+  display:block;
   text-decoration:none;
   color:#17345f;
   padding:1rem;
-  border-radius:20px;
-  margin-bottom:1rem;
+  border-radius:18px;
+  margin-bottom:.7rem;
   background:white;
   transition:.25s;
 }
@@ -401,27 +359,6 @@ body.spain .madrid-guide{
 .guide-category a:hover{
   transform:translateY(-3px);
   background:#fff2c2;
-}
-
-.guide-category img{
-  width:90px;
-  height:90px;
-  object-fit:cover;
-  border-radius:16px;
-}
-
-.guide-info{
-  display:flex;
-  flex-direction:column;
-}
-
-.guide-info strong{
-  font-size:1rem;
-}
-
-.guide-info span{
-  font-size:.9rem;
-  opacity:.7;
 }
 
 /* ===================================================== */
@@ -443,16 +380,11 @@ body.spain .madrid-guide{
   }
 
   .slide img{
-    height:420px;
+    height:450px;
   }
 
   .locked-photo{
     height:220px;
-  }
-
-  .guide-category a{
-    flex-direction:column;
-    text-align:center;
   }
 
 }
@@ -552,20 +484,6 @@ e que cada novo dia te lembre o quanto você é incrível. 🇪🇸❤️”
 
 </div>
 
-<!-- MUSIC -->
-
-<div class="music-player">
-
-  <button id="musicBtn">
-    🎵 Tocar música
-  </button>
-
-  <audio id="bgMusic" loop>
-    <source src="musica.mp3" type="audio/mpeg">
-  </audio>
-
-</div>
-
 <!-- LOCKED GALLERY -->
 
 <div class="locked-gallery">
@@ -604,7 +522,29 @@ e que cada novo dia te lembre o quanto você é incrível. 🇪🇸❤️”
 
 <div class="slideshow">
 
-  <div class="slider" id="sliderContainer"></div>
+  <div class="slider">
+
+    <div class="slide active">
+      <img src="fotos/foto01.jpg">
+      <div class="caption">✨ O começo de uma nova aventura</div>
+    </div>
+
+    <div class="slide">
+      <img src="fotos/foto02.jpg">
+      <div class="caption">❤️ Vocês sempre estarão juntos</div>
+    </div>
+
+    <div class="slide">
+      <img src="fotos/foto03.jpg">
+      <div class="caption">🇪🇸 Madrid te espera</div>
+    </div>
+
+    <div class="slide">
+      <img src="fotos/foto04.jpg">
+      <div class="caption">🌎 O mundo é seu</div>
+    </div>
+
+  </div>
 
 </div>
 
@@ -618,26 +558,16 @@ e que cada novo dia te lembre o quanto você é incrível. 🇪🇸❤️”
 
 <h3>🍷 Bares & Nightlife</h3>
 
+<a href="https://maps.google.com/?q=Lovo+Cocktail+Bar+Madrid" target="_blank">
+🍸 Lovo Cocktail Bar Madrid
+</a>
+
 <a href="https://maps.google.com/?q=Salmon+Guru+Madrid" target="_blank">
-
-  <img src="thumbs/salmon-guru.jpg">
-
-  <div class="guide-info">
-    <strong>🌟 Salmon Guru</strong>
-    <span>Coquetéis criativos e ambiente premiado</span>
-  </div>
-
+🌟 Salmon Guru
 </a>
 
 <a href="https://maps.google.com/?q=1862+Dry+Bar+Madrid" target="_blank">
-
-  <img src="thumbs/1862.jpg">
-
-  <div class="guide-info">
-    <strong>🥃 1862 Dry Bar</strong>
-    <span>Clássico e sofisticado</span>
-  </div>
-
+🥃 1862 Dry Bar
 </a>
 
 </div>
@@ -647,14 +577,29 @@ e que cada novo dia te lembre o quanto você é incrível. 🇪🇸❤️”
 <h3>🍽️ Restaurantes</h3>
 
 <a href="https://maps.google.com/?q=Rosi+La+Loca+Madrid" target="_blank">
+📸 Rosi La Loca
+</a>
 
-  <img src="thumbs/rosi.jpg">
+<a href="https://maps.google.com/?q=Inclan+Brutal+Bar+Madrid" target="_blank">
+🍷 Inclan Brutal Bar
+</a>
 
-  <div class="guide-info">
-    <strong>📸 Rosi La Loca</strong>
-    <span>Restaurante instagramável e divertido</span>
-  </div>
+<a href="https://maps.google.com/?q=CEBO+Madrid" target="_blank">
+⭐ CEBO Madrid
+</a>
 
+</div>
+
+<div class="guide-category">
+
+<h3>☕ Cafés & Brunch</h3>
+
+<a href="https://maps.google.com/?q=Federal+Cafe+Madrid" target="_blank">
+☕ Federal Café
+</a>
+
+<a href="https://maps.google.com/?q=HanSo+Cafe+Madrid" target="_blank">
+🍰 HanSo Café
 </a>
 
 </div>
@@ -664,25 +609,29 @@ e que cada novo dia te lembre o quanto você é incrível. 🇪🇸❤️”
 <h3>🏛️ Lugares imperdíveis</h3>
 
 <a href="https://maps.google.com/?q=Palacio+Real+Madrid" target="_blank">
+👑 Palacio Real
+</a>
 
-  <img src="thumbs/palacio-real.jpg">
-
-  <div class="guide-info">
-    <strong>👑 Palacio Real</strong>
-    <span>O palácio mais icônico da Espanha</span>
-  </div>
-
+<a href="https://maps.google.com/?q=Templo+de+Debod+Madrid" target="_blank">
+🌅 Templo de Debod
 </a>
 
 <a href="https://maps.google.com/?q=Gran+Via+Madrid" target="_blank">
+🌆 Gran Vía
+</a>
 
-  <img src="thumbs/granvia.jpg">
+</div>
 
-  <div class="guide-info">
-    <strong>🌆 Gran Vía</strong>
-    <span>A avenida mais vibrante de Madrid</span>
-  </div>
+<div class="guide-category">
 
+<h3>🚇 Metro de Madrid</h3>
+
+<a href="https://www.metromadrid.es/" target="_blank">
+🚇 Metro Oficial
+</a>
+
+<a href="https://www.metromadrid.es/es/viaja-en-metro/plano-de-metro" target="_blank">
+🗺️ Mapa do metrô
 </a>
 
 </div>
@@ -779,45 +728,6 @@ setInterval(updateCounter,1000);
 updateCounter();
 
 /* ===================================================== */
-/* GERAR 38 FOTOS */
-/* ===================================================== */
-
-const sliderContainer =
-document.getElementById("sliderContainer");
-
-const captions = [
-  "✨ Uma nova aventura",
-  "❤️ Momentos especiais",
-  "🌎 O mundo é seu",
-  "🇪🇸 Madrid te espera",
-  "✈️ Novos começos",
-  "📸 Memórias eternas"
-];
-
-for(let i = 1; i <= 38; i++){
-
-  const slide = document.createElement("div");
-
-  slide.classList.add("slide");
-
-  if(i === 1){
-    slide.classList.add("active");
-  }
-
-  const number = String(i).padStart(2,'0');
-
-  slide.innerHTML = `
-    <img src="fotos/foto${number}.jpg">
-    <div class="caption">
-      ${captions[i % captions.length]}
-    </div>
-  `;
-
-  sliderContainer.appendChild(slide);
-
-}
-
-/* ===================================================== */
 /* SLIDESHOW */
 /* ===================================================== */
 
@@ -837,43 +747,7 @@ setInterval(()=>{
 
   slides[slideIndex].classList.add("active");
 
-},3500);
-
-/* ===================================================== */
-/* MUSIC */
-/* ===================================================== */
-
-const musicBtn =
-document.getElementById("musicBtn");
-
-const bgMusic =
-document.getElementById("bgMusic");
-
-let playing = false;
-
-musicBtn.addEventListener("click",()=>{
-
-  if(!playing){
-
-    bgMusic.play();
-
-    musicBtn.innerHTML =
-    "⏸️ Pausar música";
-
-    playing = true;
-
-  }else{
-
-    bgMusic.pause();
-
-    musicBtn.innerHTML =
-    "🎵 Tocar música";
-
-    playing = false;
-
-  }
-
-});
+},4000);
 
 </script>
 
