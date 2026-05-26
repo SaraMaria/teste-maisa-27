@@ -1,853 +1,783 @@
-
 <!DOCTYPE html>
-<html lang="pt-BR">
-
+<html lang="es">
 <head>
-
-  <meta charset="UTF-8" />
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  />
-
-  <title>Maisa ✈️🇪🇸</title>
-
-  <!-- GOOGLE FONTS -->
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;700&family=Montserrat:wght@300;400;500;600&display=swap"
-    rel="stylesheet"
-  />
-
-  <style>
-
-    /* ===================================================== */
-    /* RESET */
-    /* ===================================================== */
-
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
-
-    body{
-      font-family:'Montserrat',sans-serif;
-      overflow-x:hidden;
-      background:#f5f2eb;
-      color:#17345f;
-    }
-
-    /* ===================================================== */
-    /* BACKGROUNDS */
-    /* ===================================================== */
-
-    #bgArg{
-      position:fixed;
-      inset:0;
-
-      background:
-      linear-gradient(
-        to bottom,
-        #74ACDF 0%,
-        #74ACDF 33%,
-        white 33%,
-        white 66%,
-        #74ACDF 66%,
-        #74ACDF 100%
-      );
-
-      z-index:-2;
-      transition:1.5s;
-    }
-
-    #bgEsp{
-      position:fixed;
-      inset:0;
-
-      background:
-      linear-gradient(
-        to bottom,
-        #c60b1e 0%,
-        #c60b1e 25%,
-        #ffc400 25%,
-        #ffc400 75%,
-        #c60b1e 75%,
-        #c60b1e 100%
-      );
-
-      opacity:0;
-      z-index:-1;
-      transition:1.5s;
-    }
-
-    /* ===================================================== */
-    /* MAIN */
-    /* ===================================================== */
-
-    .page{
-      width:100%;
-      max-width:1100px;
-      margin:auto;
-      padding:2rem 1rem 5rem;
-      text-align:center;
-    }
-
-    /* ===================================================== */
-    /* TITLES */
-    /* ===================================================== */
-
-    .flags{
-      font-size:2.5rem;
-      margin-bottom:1rem;
-    }
-
-    h1{
-      font-family:'Cormorant Garamond',serif;
-      font-size:4rem;
-      color:#17345f;
-      margin-bottom:.5rem;
-    }
-
-    .subtitle{
-      font-size:1.1rem;
-      opacity:.8;
-      margin-bottom:2rem;
-    }
-
-    /* ===================================================== */
-    /* COUNTER */
-    /* ===================================================== */
-
-    .counter{
-      display:flex;
-      justify-content:center;
-      gap:1rem;
-      flex-wrap:wrap;
-      margin-bottom:2rem;
-    }
-
-    .box{
-      width:160px;
-      padding:1.5rem;
-      border-radius:25px;
-
-      background:rgba(255,255,255,.75);
-
-      backdrop-filter:blur(10px);
-
-      box-shadow:0 10px 30px rgba(0,0,0,.08);
-    }
-
-    .num{
-      font-size:4rem;
-      font-weight:700;
-      font-family:'Cormorant Garamond',serif;
-    }
-
-    .label{
-      letter-spacing:3px;
-      font-size:.8rem;
-      margin-top:.3rem;
-    }
-
-    /* ===================================================== */
-    /* PROGRESS */
-    /* ===================================================== */
-
-    .progress{
-      width:100%;
-      max-width:800px;
-      margin:0 auto 2rem;
-    }
-
-    .progress-bar{
-      width:100%;
-      height:10px;
-      border-radius:999px;
-      overflow:hidden;
-      background:rgba(255,255,255,.6);
-    }
-
-    .progress-fill{
-      height:100%;
-      width:0%;
-
-      background:
-      linear-gradient(
-        90deg,
-        #74ACDF,
-        #ffc400
-      );
-
-      transition:.4s;
-    }
-
-    .progress-text{
-      margin-top:.7rem;
-      display:flex;
-      justify-content:space-between;
-      font-size:.9rem;
-    }
-
-    /* ===================================================== */
-    /* DAYS */
-    /* ===================================================== */
-
-    .days-counter{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:.7rem;
-      margin:2rem 0;
-    }
-
-    .day-ball{
-      width:70px;
-      height:70px;
-      border-radius:50%;
-
-      background:white;
-
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-
-      font-weight:700;
-
-      box-shadow:0 10px 25px rgba(0,0,0,.08);
-    }
-
-    .day-ball.active{
-      background:#74ACDF;
-      color:white;
-    }
-
-    .day-ball.final{
-      background:
-      linear-gradient(
-        135deg,
-        #c60b1e,
-        #ffc400
-      );
-
-      color:white;
-    }
-
-    .day-line{
-      width:40px;
-      height:4px;
-      border-radius:999px;
-      background:white;
-    }
-
-    /* ===================================================== */
-    /* MESSAGE */
-    /* ===================================================== */
-
-    .message{
-      max-width:800px;
-      margin:0 auto 3rem;
-
-      background:rgba(255,255,255,.75);
-
-      padding:2rem;
-
-      border-radius:30px;
-
-      line-height:1.8;
-      font-size:1.1rem;
-
-      box-shadow:0 10px 30px rgba(0,0,0,.08);
-    }
-
-    /* ===================================================== */
-    /* MUSIC */
-    /* ===================================================== */
-
-    .music-player{
-      margin:2rem auto;
-      display:flex;
-      justify-content:center;
-    }
-
-    .music-player button{
-      border:none;
-
-      padding:1rem 2rem;
-
-      border-radius:999px;
-
-      background:
-      linear-gradient(
-        135deg,
-        #17345f,
-        #74ACDF
-      );
-
-      color:white;
-
-      font-size:1rem;
-      font-weight:600;
-
-      cursor:pointer;
-
-      transition:.3s;
-
-      box-shadow:0 10px 25px rgba(0,0,0,.15);
-    }
-
-    .music-player button:hover{
-      transform:translateY(-3px);
-    }
-
-    /* ===================================================== */
-    /* LOCKED GALLERY */
-    /* ===================================================== */
-
-    .locked-gallery{
-      margin:3rem auto;
-    }
-
-    .gallery-title{
-      font-size:2.2rem;
-      font-family:'Cormorant Garamond',serif;
-      margin-bottom:1.5rem;
-    }
-
-    .gallery-grid{
-      display:grid;
-
-      grid-template-columns:
-      repeat(auto-fit,minmax(220px,1fr));
-
-      gap:1rem;
-    }
-
-    .locked-photo{
-      position:relative;
-      height:320px;
-
-      border-radius:24px;
-      overflow:hidden;
-
-      box-shadow:0 10px 30px rgba(0,0,0,.15);
-    }
-
-    .locked-photo img{
-      width:100%;
-      height:100%;
-
-      object-fit:cover;
-
-      filter:blur(12px) brightness(.5);
-
-      transform:scale(1.1);
-    }
-
-    .locked-overlay{
-      position:absolute;
-      inset:0;
-
-      display:flex;
-      align-items:center;
-      justify-content:center;
-
-      font-size:4rem;
-      color:white;
-
-      backdrop-filter:blur(4px);
-    }
-
-    /* ===================================================== */
-    /* SLIDESHOW */
-    /* ===================================================== */
-
-    .slideshow{
-      display:none;
-      margin:3rem auto;
-    }
-
-    body.spain .slideshow{
-      display:block;
-    }
-
-    .slider{
-      position:relative;
-      max-width:950px;
-      margin:auto;
-
-      overflow:hidden;
-
-      border-radius:30px;
-
-      background:black;
-    }
-
-    .slide{
-      display:none;
-      animation:fade .8s ease;
-    }
-
-    .slide.active{
-      display:block;
-    }
-
-    .slide img{
-      width:100%;
-      height:700px;
-
-      object-fit:contain;
-      background:black;
-    }
-
-    .caption{
-      background:rgba(0,0,0,.75);
-      color:white;
-      padding:1rem;
-    }
-
-    @keyframes fade{
-      from{
-        opacity:0;
-      }
-
-      to{
-        opacity:1;
-      }
-    }
-
-    /* ===================================================== */
-    /* GUIDE */
-    /* ===================================================== */
-
-    .madrid-guide{
-      display:none;
-
-      margin-top:4rem;
-
-      background:rgba(255,255,255,.82);
-
-      padding:2rem;
-
-      border-radius:35px;
-
-      box-shadow:0 10px 30px rgba(0,0,0,.1);
-    }
-
-    body.spain .madrid-guide{
-      display:block;
-    }
-
-    .madrid-guide h2{
-      font-size:3rem;
-      margin-bottom:2rem;
-
-      font-family:'Cormorant Garamond',serif;
-
-      color:#a10016;
-    }
-
-    .guide-category{
-      margin-bottom:2rem;
-      text-align:left;
-    }
-
-    .guide-category h3{
-      margin-bottom:1rem;
-      color:#a10016;
-    }
-
-    .guide-category a{
-      display:flex;
-      align-items:center;
-      gap:1rem;
-
-      text-decoration:none;
-      color:#17345f;
-
-      padding:1rem;
-
-      border-radius:20px;
-
-      margin-bottom:1rem;
-
-      background:white;
-
-      transition:.25s;
-    }
-
-    .guide-category a:hover{
-      transform:translateY(-3px);
-      background:#fff2c2;
-    }
-
-    .guide-category img{
-      width:90px;
-      height:90px;
-
-      object-fit:cover;
-
-      border-radius:16px;
-    }
-
-    .guide-info{
-      display:flex;
-      flex-direction:column;
-    }
-
-    .guide-info strong{
-      font-size:1rem;
-    }
-
-    .guide-info span{
-      font-size:.9rem;
-      opacity:.7;
-    }
-
-    /* ===================================================== */
-    /* MOBILE */
-    /* ===================================================== */
-
-    @media(max-width:700px){
-
-      h1{
-        font-size:2.8rem;
-      }
-
-      .box{
-        width:130px;
-      }
-
-      .num{
-        font-size:3rem;
-      }
-
-      .slide img{
-        height:420px;
-      }
-
-      .locked-photo{
-        height:220px;
-      }
-
-      .guide-category a{
-        flex-direction:column;
-        text-align:center;
-      }
-
-    }
-
-  </style>
-
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
+<meta name="description" content="Una sorpresa especial para Maisa ✈️🇦🇷🇪🇸"/>
+<title>¡Maisa se va! ✈️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+<style>
+
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html,body{
+  min-height:100%;
+  overflow-x:hidden;
+  font-family:'Outfit',sans-serif;
+  background:#f5f0e8;
+}
+
+/* BACKGROUNDS */
+
+#bgArg{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  background-color:#f5f0e8;
+  transition:opacity 2.5s ease;
+}
+
+#bgArg::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgba(116,172,223,.42) 0,
+      rgba(116,172,223,.42) 50px,
+      transparent 50px,
+      transparent 100px
+    ),
+    repeating-linear-gradient(
+      180deg,
+      rgba(116,172,223,.42) 0,
+      rgba(116,172,223,.42) 50px,
+      transparent 50px,
+      transparent 100px
+    );
+}
+
+#bgEsp{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  display:flex;
+  flex-direction:column;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 2.5s ease;
+}
+
+#bgEsp .r{
+  flex:1;
+  background:#c60b1e;
+}
+
+#bgEsp .y{
+  flex:2;
+  background:#ffc400;
+}
+
+/* LAYOUT */
+
+.page{
+  position:relative;
+  z-index:10;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  min-height:100vh;
+  padding:2rem 1rem 3rem;
+  text-align:center;
+  max-width:900px;
+  margin:0 auto;
+}
+
+/* HEADER */
+
+.flags-row{
+  display:flex;
+  align-items:center;
+  gap:.8rem;
+  font-size:clamp(1.8rem,5vw,2.5rem);
+  margin-bottom:.5rem;
+}
+
+.arr{
+  animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+  0%,100%{opacity:.5;}
+  50%{opacity:1;}
+}
+
+h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.2rem,7vw,4rem);
+  color:#16335f;
+  margin-bottom:.2rem;
+}
+
+.subtitle{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:clamp(1rem,3vw,1.3rem);
+  color:#16335f;
+  opacity:.8;
+  margin-bottom:1rem;
+}
+
+/* COUNTER */
+
+.counter-wrap{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1rem;
+  width:100%;
+  max-width:650px;
+  margin-bottom:1rem;
+}
+
+.cbox{
+  background:rgba(255,255,255,.75);
+  border-radius:22px;
+  padding:1rem;
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(116,172,223,.3);
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.cnum{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.2rem,7vw,4rem);
+  color:#16335f;
+  font-weight:700;
+}
+
+.clbl{
+  text-transform:uppercase;
+  letter-spacing:.15em;
+  font-size:.7rem;
+  margin-top:.3rem;
+  color:#16335f;
+  opacity:.7;
+}
+
+/* PROGRESS */
+
+.prog-wrap{
+  width:100%;
+  max-width:650px;
+  margin-bottom:1rem;
+}
+
+.prog-bg{
+  height:10px;
+  background:rgba(255,255,255,.5);
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.prog-fill{
+  height:100%;
+  width:0%;
+  border-radius:999px;
+  background:linear-gradient(90deg,#74ACDF,#F6B40E);
+  transition:width 1s ease;
+}
+
+.prog-labels{
+  margin-top:.5rem;
+  display:flex;
+  justify-content:space-between;
+  font-size:.8rem;
+  color:#16335f;
+}
+
+/* MESSAGE */
+
+.msg-card{
+  width:100%;
+  max-width:650px;
+  background:rgba(255,255,255,.75);
+  border-radius:28px;
+  padding:2rem;
+  backdrop-filter:blur(10px);
+  margin-bottom:1rem;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.msg-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.2rem,3vw,1.5rem);
+  line-height:1.8;
+  color:#16335f;
+  font-style:italic;
+}
+
+/* SLIDESHOW */
+
+.slideshow-wrap{
+  width:100%;
+  max-width:700px;
+  margin-bottom:1rem;
+  display:none;
+}
+
+.slideshow-box{
+  width:100%;
+  aspect-ratio:4/5;
+  min-height:500px;
+  border-radius:28px;
+  overflow:hidden;
+  position:relative;
+  background:#000;
+  box-shadow:0 10px 35px rgba(0,0,0,.18);
+}
+
+@media(max-width:500px){
+  .slideshow-box{
+    aspect-ratio:3/4;
+    min-height:420px;
+  }
+}
+
+.slide{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transition:opacity 1.5s ease-in-out;
+}
+
+.slide.active{
+  opacity:1;
+}
+
+.slide img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
+  background:#000;
+}
+
+.slide-ov{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,.65),
+    rgba(0,0,0,.1),
+    transparent
+  );
+}
+
+.slide-cap{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  padding:1.2rem;
+  z-index:2;
+}
+
+.slide-cap div{
+  color:#fff;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;
+  font-style:italic;
+}
+
+.slide-num{
+  position:absolute;
+  top:1rem;
+  right:1rem;
+  color:#fff;
+  z-index:3;
+  opacity:.7;
+}
+
+.slide-arrows{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:1rem;
+  z-index:5;
+}
+
+.slide-arr{
+  width:44px;
+  height:44px;
+  border:none;
+  border-radius:50%;
+  background:rgba(255,255,255,.85);
+  cursor:pointer;
+  font-size:1.4rem;
+}
+
+.slide-nav{
+  display:none;
+  justify-content:center;
+  gap:.4rem;
+  margin-top:.8rem;
+}
+
+.slide-dot{
+  width:9px;
+  height:9px;
+  border:none;
+  border-radius:50%;
+  background:rgba(0,0,0,.2);
+  cursor:pointer;
+}
+
+.slide-dot.on{
+  background:#74ACDF;
+  transform:scale(1.4);
+}
+
+/* MUSIC */
+
+.music-bar{
+  width:100%;
+  max-width:650px;
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  padding:1rem;
+  background:rgba(255,255,255,.75);
+  border-radius:20px;
+  cursor:pointer;
+  margin-bottom:1rem;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.mdisc{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#74ACDF,#F6B40E);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  animation:spin 4s linear infinite paused;
+}
+
+.mdisc.go{
+  animation-play-state:running;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+.minfo{
+  text-align:left;
+}
+
+.mttl{
+  font-weight:600;
+  color:#16335f;
+}
+
+.mart{
+  font-size:.85rem;
+  opacity:.7;
+}
+
+/* FOOTER */
+
+.note{
+  margin-top:.5rem;
+  color:#16335f;
+  font-style:italic;
+}
+
+.by-tag{
+  margin-top:1rem;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;
+  opacity:.5;
+}
+
+/* SPAIN MODE */
+
+body.spain h1,
+body.spain .subtitle,
+body.spain .msg-text,
+body.spain .mttl,
+body.spain .note,
+body.spain .by-tag{
+  color:#5f0010;
+}
+
+body.spain .slide-nav{
+  display:flex;
+}
+
+body.spain .slideshow-wrap{
+  display:block;
+}
+
+</style>
 </head>
 
 <body>
 
-  <div id="bgArg"></div>
-  <div id="bgEsp"></div>
+<div id="bgArg"></div>
 
-  <div class="page">
+<div id="bgEsp">
+  <div class="r"></div>
+  <div class="y"></div>
+  <div class="r"></div>
+</div>
 
-    <div class="flags">
-      🇦🇷 ✈️ 🇪🇸
+<div class="page">
+
+  <div class="flags-row">
+    <span>🇦🇷</span>
+    <span class="arr">→</span>
+    <span>🇪🇸</span>
+  </div>
+
+  <h1>¡Maisa, te vas!</h1>
+
+  <p class="subtitle">
+    Una nueva aventura te espera…
+  </p>
+
+  <!-- CONTADOR -->
+
+  <div class="counter-wrap">
+
+    <div class="cbox">
+      <div class="cnum" id="dN">0</div>
+      <div class="clbl">Días</div>
     </div>
 
-    <h1>
-      Maisa, tu aventura empieza ✨
-    </h1>
-
-    <p class="subtitle">
-      Contagem regressiva para sua nova vida em Madrid
-    </p>
-
-    <!-- COUNTER -->
-
-    <div class="counter">
-
-      <div class="box">
-        <div class="num" id="days">00</div>
-        <div class="label">DIAS</div>
-      </div>
-
-      <div class="box">
-        <div class="num" id="hours">00</div>
-        <div class="label">HORAS</div>
-      </div>
-
-      <div class="box">
-        <div class="num" id="minutes">00</div>
-        <div class="label">MINUTOS</div>
-      </div>
-
-      <div class="box">
-        <div class="num" id="seconds">00</div>
-        <div class="label">SEGUNDOS</div>
-      </div>
-
+    <div class="cbox">
+      <div class="cnum" id="hN">00</div>
+      <div class="clbl">Horas</div>
     </div>
 
-    <!-- PROGRESS -->
-
-    <div class="progress">
-
-      <div class="progress-bar">
-        <div
-          class="progress-fill"
-          id="progressFill"
-        ></div>
-      </div>
-
-      <div class="progress-text">
-        <span>25 maio 🇦🇷</span>
-        <span id="progressText">0%</span>
-        <span>27 maio ✈️</span>
-      </div>
-
+    <div class="cbox">
+      <div class="cnum" id="mN">00</div>
+      <div class="clbl">Minutos</div>
     </div>
 
-    <!-- MESSAGE -->
-
-    <div class="message">
-
-      “Que Madrid te receba com os braços abertos,
-      que cada rua vire memória,
-      e que cada novo dia te lembre o quanto você é incrível. 🇪🇸❤️”
-
-    </div>
-
-    <!-- MUSIC -->
-
-    <div class="music-player">
-
-      <button id="musicBtn">
-        🎵 Tocar música
-      </button>
-
-      <audio id="bgMusic" loop>
-        <source
-          src="musica.mp3"
-          type="audio/mpeg"
-        />
-      </audio>
-
-    </div>
-
-    <!-- SLIDESHOW -->
-
-    <div class="slideshow">
-
-      <div
-        class="slider"
-        id="sliderContainer"
-      ></div>
-
+    <div class="cbox">
+      <div class="cnum" id="sN">00</div>
+      <div class="clbl">Segundos</div>
     </div>
 
   </div>
 
-  <script>
+  <!-- PROGRESS -->
 
-    const targetDate =
-    new Date(2026,4,27,0,0,0).getTime();
+  <div class="prog-wrap">
 
-    function updateCounter(){
+    <div class="prog-bg">
+      <div class="prog-fill" id="pFill"></div>
+    </div>
 
-      const now =
-      new Date().getTime();
+    <div class="prog-labels">
+      <span>Hoy 🇦🇷</span>
+      <span id="pPct">0%</span>
+      <span>27 May ✈️</span>
+    </div>
 
-      const distance =
-      targetDate - now;
+  </div>
 
-      const days =
-      Math.floor(
-        distance / (1000 * 60 * 60 * 24)
-      );
+  <!-- SLIDESHOW -->
 
-      const hours =
-      Math.floor(
-        (distance % (1000 * 60 * 60 * 24))
-        / (1000 * 60 * 60)
-      );
+  <div class="slideshow-wrap" id="slideshowWrap">
 
-      const minutes =
-      Math.floor(
-        (distance % (1000 * 60 * 60))
-        / (1000 * 60)
-      );
+    <div class="slideshow-box" id="slideshowBox">
 
-      const seconds =
-      Math.floor(
-        (distance % (1000 * 60))
-        / 1000
-      );
+      <div class="slide-arrows">
+        <button class="slide-arr" onclick="prevSlide()">‹</button>
+        <button class="slide-arr" onclick="nextSlide()">›</button>
+      </div>
 
-      document.getElementById("days")
-      .innerHTML =
-      String(days).padStart(2,'0');
+    </div>
 
-      document.getElementById("hours")
-      .innerHTML =
-      String(hours).padStart(2,'0');
+    <div class="slide-nav" id="slideNav"></div>
 
-      document.getElementById("minutes")
-      .innerHTML =
-      String(minutes).padStart(2,'0');
+  </div>
 
-      document.getElementById("seconds")
-      .innerHTML =
-      String(seconds).padStart(2,'0');
+  <!-- MESSAGE -->
 
-      const startDate =
-      new Date(2026,4,25,0,0,0).getTime();
+  <div class="msg-card">
+    <p class="msg-text">
+      "Que España te reciba con los brazos abiertos,
+      que cada calle de Madrid sea un descubrimiento,
+      y que te lleves en la valija el amor de todos los
+      que se quedan acá. ¡Vas a brillar, amiga! 🌺"
+    </p>
+  </div>
 
-      const total =
-      targetDate - startDate;
+  <!-- MUSIC -->
 
-      const current =
-      now - startDate;
+  <div class="music-bar" onclick="toggleMusic()">
 
-      const progress =
-      Math.min(
-        100,
-        Math.max(
-          0,
-          (current / total) * 100
-        )
-      );
+    <div class="mdisc" id="mDisc">🎵</div>
 
-      document
-      .getElementById("progressFill")
-      .style.width =
-      progress + "%";
+    <div class="minfo">
+      <div class="mttl">Una canción para Maisa 🎶</div>
+      <div class="mart" id="martEl">Tocá para escuchar ▶</div>
+    </div>
 
-      document
-      .getElementById("progressText")
-      .innerHTML =
-      Math.floor(progress) + "%";
+  </div>
 
-      if(now >= targetDate){
+  <p class="note">
+    El hogar está donde está el corazón ❤️
+  </p>
 
-        document.body.classList.add("spain");
+  <p class="by-tag">
+    by: sarang ✨
+  </p>
 
-        document
-        .getElementById("bgArg")
-        .style.opacity = "0";
+</div>
 
-        document
-        .getElementById("bgEsp")
-        .style.opacity = "1";
+<audio
+  id="bgAudio"
+  loop
+  preload="auto"
+  src="audio/musica.mp3">
+</audio>
 
-      }
+<script>
 
-    }
+/* DATA FINAL */
 
-    setInterval(updateCounter,1000);
+const endDate = new Date(2026, 4, 27, 0, 0, 0);
 
-    updateCounter();
+/* FOTOS */
 
-    /* ===================================================== */
-    /* SLIDESHOW 38 FOTOS */
-    /* ===================================================== */
+const CAPTIONS = [
+  '¡El comienzo de algo increíble!',
+  'Madrid te espera ✨',
+  'Una nueva aventura',
+  'Recuerdos para siempre',
+  'Vas a brillar ❤️'
+];
 
-    const sliderContainer =
-    document.getElementById("sliderContainer");
+/* SLIDESHOW */
 
-    const captions = [
-      "✨ Uma nova aventura",
-      "❤️ Momentos especiais",
-      "🇪🇸 Madrid te espera",
-      "🌎 O mundo é seu",
-      "📸 Memórias eternas",
-      "✈️ Novos começos"
-    ];
+let currentSlide = 0;
+let slideTimer = null;
 
-    for(let i = 1; i <= 38; i++){
+function buildSlideshow(photoCount){
 
-      const slide =
-      document.createElement("div");
+  const box = document.getElementById('slideshowBox');
+  const nav = document.getElementById('slideNav');
 
-      slide.classList.add("slide");
+  box.querySelectorAll('.slide').forEach(el=>el.remove());
 
-      if(i === 1){
-        slide.classList.add("active");
-      }
+  nav.innerHTML = '';
 
-      const number =
-      String(i).padStart(2,'0');
+  for(let i=0;i<photoCount;i++){
 
-      slide.innerHTML = `
-        <img src="fotos/foto${number}.jpg">
-        <div class="caption">
-          ${captions[i % captions.length]}
-        </div>
-      `;
+    const slide = document.createElement('div');
+    slide.className = 'slide' + (i===0 ? ' active' : '');
 
-      sliderContainer.appendChild(slide);
+    const img = document.createElement('img');
 
-    }
+    const num = String(i+1).padStart(2,'0');
 
-    let slideIndex = 0;
+    img.src = `fotos/foto${num}.jpg`;
 
-    const slides =
-    document.querySelectorAll(".slide");
+    img.loading = 'eager';
 
-    setInterval(()=>{
+    slide.appendChild(img);
 
-      slides[slideIndex]
-      .classList.remove("active");
+    const ov = document.createElement('div');
+    ov.className = 'slide-ov';
 
-      slideIndex++;
+    slide.appendChild(ov);
 
-      if(slideIndex >= slides.length){
-        slideIndex = 0;
-      }
+    const cap = document.createElement('div');
+    cap.className = 'slide-cap';
 
-      slides[slideIndex]
-      .classList.add("active");
+    cap.innerHTML = `<div>${CAPTIONS[i] || 'Te queremos ❤️'}</div>`;
 
-    },3500);
+    slide.appendChild(cap);
 
-    /* ===================================================== */
-    /* MUSIC */
-    /* ===================================================== */
+    const n = document.createElement('div');
+    n.className = 'slide-num';
+    n.innerText = `${i+1} / ${photoCount}`;
 
-    const musicBtn =
-    document.getElementById("musicBtn");
+    slide.appendChild(n);
 
-    const bgMusic =
-    document.getElementById("bgMusic");
+    box.appendChild(slide);
 
-    let playing = false;
+    const dot = document.createElement('button');
 
-    musicBtn.addEventListener("click",()=>{
+    dot.className = 'slide-dot' + (i===0 ? ' on' : '');
 
-      if(!playing){
+    dot.onclick = ()=>goSlide(i);
 
-        bgMusic.play();
+    nav.appendChild(dot);
+  }
 
-        musicBtn.innerHTML =
-        "⏸️ Pausar música";
+  if(slideTimer) clearInterval(slideTimer);
 
-        playing = true;
+  slideTimer = setInterval(nextSlide,5000);
+}
 
-      }else{
+function goSlide(n){
 
-        bgMusic.pause();
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.slide-dot');
 
-        musicBtn.innerHTML =
-        "🎵 Tocar música";
+  slides[currentSlide].classList.remove('active');
+  dots[currentSlide].classList.remove('on');
 
-        playing = false;
+  currentSlide = (n + slides.length) % slides.length;
 
-      }
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].classList.add('on');
+}
 
-    });
+function nextSlide(){
+  goSlide(currentSlide+1);
+}
 
-  </script>
+function prevSlide(){
+  goSlide(currentSlide-1);
+}
+
+/* SPAIN MODE */
+
+let spainMode = false;
+
+function activateSpain(){
+
+  if(spainMode) return;
+
+  spainMode = true;
+
+  document.body.classList.add('spain');
+
+  document.getElementById('bgArg').style.opacity = '0';
+
+  const esp = document.getElementById('bgEsp');
+
+  esp.style.opacity = '1';
+
+  document.getElementById('slideshowWrap').style.display = 'block';
+
+  buildSlideshow(5);
+}
+
+/* MUSIC */
+
+let musicOn = false;
+
+function toggleMusic(){
+
+  const audio = document.getElementById('bgAudio');
+
+  const disc = document.getElementById('mDisc');
+
+  if(!musicOn){
+
+    audio.play();
+
+    disc.classList.add('go');
+
+    document.getElementById('martEl').textContent =
+      'tocando... ❚❚';
+
+    musicOn = true;
+
+  } else {
+
+    audio.pause();
+
+    disc.classList.remove('go');
+
+    document.getElementById('martEl').textContent =
+      'Tocá para escuchar ▶';
+
+    musicOn = false;
+  }
+}
+
+/* COUNTER */
+
+function tick(){
+
+  const now = new Date();
+
+  const rem = endDate.getTime() - now.getTime();
+
+  if(rem <= 0){
+
+    activateSpain();
+
+    document.getElementById('dN').textContent = '0';
+    document.getElementById('hN').textContent = '00';
+    document.getElementById('mN').textContent = '00';
+    document.getElementById('sN').textContent = '00';
+
+    document.getElementById('pFill').style.width = '100%';
+
+    document.getElementById('pPct').textContent = '100%';
+
+    return;
+  }
+
+  const totalSeconds = Math.floor(rem / 1000);
+
+  const days = Math.floor(totalSeconds / 86400);
+
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+
+  const seconds = totalSeconds % 60;
+
+  document.getElementById('dN').textContent = days;
+
+  document.getElementById('hN').textContent =
+    String(hours).padStart(2,'0');
+
+  document.getElementById('mN').textContent =
+    String(minutes).padStart(2,'0');
+
+  document.getElementById('sN').textContent =
+    String(seconds).padStart(2,'0');
+
+  /* PROGRESS */
+
+  const startDate = new Date(2026, 4, 22, 0, 0, 0);
+
+  const total = endDate.getTime() - startDate.getTime();
+
+  const elapsed = now.getTime() - startDate.getTime();
+
+  const pct = Math.min(
+    100,
+    Math.max(0,(elapsed / total) * 100)
+  );
+
+  document.getElementById('pFill').style.width =
+    pct + '%';
+
+  document.getElementById('pPct').textContent =
+    Math.floor(pct) + '%';
+}
+
+tick();
+
+setInterval(tick,1000);
+
+</script>
 
 </body>
 </html>
-```
