@@ -1,755 +1,853 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Maisa ✈️🇪🇸</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-<style>
-
-/* ===================================================== */
-/* RESET */
-/* ===================================================== */
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-body{
-  font-family:'Montserrat',sans-serif;
-  overflow-x:hidden;
-  background:#f5f2eb;
-  color:#17345f;
-}
-
-/* ===================================================== */
-/* BACKGROUNDS */
-/* ===================================================== */
-
-#bgArg{
-  position:fixed;
-  inset:0;
-  background:
-  linear-gradient(
-    to bottom,
-    #74ACDF 0%,
-    #74ACDF 33%,
-    white 33%,
-    white 66%,
-    #74ACDF 66%,
-    #74ACDF 100%
-  );
-  z-index:-2;
-  transition:1.5s;
-}
-
-#bgEsp{
-  position:fixed;
-  inset:0;
-  background:
-  linear-gradient(
-    to bottom,
-    #c60b1e 0%,
-    #c60b1e 25%,
-    #ffc400 25%,
-    #ffc400 75%,
-    #c60b1e 75%,
-    #c60b1e 100%
-  );
-  opacity:0;
-  z-index:-1;
-  transition:1.5s;
-}
-
-/* ===================================================== */
-/* MAIN */
-/* ===================================================== */
-
-.page{
-  width:100%;
-  max-width:1100px;
-  margin:auto;
-  padding:2rem 1rem 5rem;
-  text-align:center;
-}
-
-/* ===================================================== */
-/* TITLES */
-/* ===================================================== */
-
-.flags{
-  font-size:2.5rem;
-  margin-bottom:1rem;
-}
-
-h1{
-  font-family:'Cormorant Garamond',serif;
-  font-size:4rem;
-  color:#17345f;
-  margin-bottom:.5rem;
-}
-
-.subtitle{
-  font-size:1.1rem;
-  opacity:.8;
-  margin-bottom:2rem;
-}
-
-/* ===================================================== */
-/* COUNTER */
-/* ===================================================== */
-
-.counter{
-  display:flex;
-  justify-content:center;
-  gap:1rem;
-  flex-wrap:wrap;
-  margin-bottom:2rem;
-}
-
-.box{
-  width:160px;
-  padding:1.5rem;
-  border-radius:25px;
-  background:rgba(255,255,255,.75);
-  backdrop-filter:blur(10px);
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
-}
-
-.num{
-  font-size:4rem;
-  font-weight:700;
-  font-family:'Cormorant Garamond',serif;
-}
-
-.label{
-  letter-spacing:3px;
-  font-size:.8rem;
-  margin-top:.3rem;
-}
-
-/* ===================================================== */
-/* PROGRESS */
-/* ===================================================== */
-
-.progress{
-  width:100%;
-  max-width:800px;
-  margin:0 auto 2rem;
-}
-
-.progress-bar{
-  width:100%;
-  height:10px;
-  border-radius:999px;
-  overflow:hidden;
-  background:rgba(255,255,255,.6);
-}
-
-.progress-fill{
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,#74ACDF,#ffc400);
-  transition:.4s;
-}
-
-.progress-text{
-  margin-top:.7rem;
-  display:flex;
-  justify-content:space-between;
-  font-size:.9rem;
-}
-
-/* ===================================================== */
-/* DAYS */
-/* ===================================================== */
-
-.days-counter{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:.7rem;
-  margin:2rem 0;
-}
-
-.day-ball{
-  width:70px;
-  height:70px;
-  border-radius:50%;
-  background:white;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  font-weight:700;
-  box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
-
-.day-ball.active{
-  background:#74ACDF;
-  color:white;
-}
-
-.day-ball.final{
-  background:linear-gradient(135deg,#c60b1e,#ffc400);
-  color:white;
-}
-
-.day-line{
-  width:40px;
-  height:4px;
-  border-radius:999px;
-  background:white;
-}
-
-/* ===================================================== */
-/* MESSAGE */
-/* ===================================================== */
-
-.message{
-  max-width:800px;
-  margin:0 auto 3rem;
-  background:rgba(255,255,255,.75);
-  padding:2rem;
-  border-radius:30px;
-  line-height:1.8;
-  font-size:1.1rem;
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
-}
-
-/* ===================================================== */
-/* LOCKED GALLERY */
-/* ===================================================== */
-
-.locked-gallery{
-  margin:3rem auto;
-}
-
-.gallery-title{
-  font-size:2.2rem;
-  font-family:'Cormorant Garamond',serif;
-  margin-bottom:1.5rem;
-}
-
-.gallery-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:1rem;
-}
-
-.locked-photo{
-  position:relative;
-  height:320px;
-  border-radius:24px;
-  overflow:hidden;
-  box-shadow:0 10px 30px rgba(0,0,0,.15);
-}
-
-.locked-photo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  filter:blur(12px) brightness(.5);
-  transform:scale(1.1);
-}
-
-.locked-overlay{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:4rem;
-  color:white;
-  backdrop-filter:blur(4px);
-}
-
-/* ===================================================== */
-/* SLIDESHOW */
-/* ===================================================== */
-
-.slideshow{
-  display:none;
-  margin:3rem auto;
-}
-
-body.spain .slideshow{
-  display:block;
-}
-
-.slider{
-  position:relative;
-  max-width:900px;
-  margin:auto;
-  overflow:hidden;
-  border-radius:30px;
-}
-
-.slide{
-  display:none;
-}
-
-.slide.active{
-  display:block;
-}
-
-.slide img{
-  width:100%;
-  height:650px;
-  object-fit:contain;
-  background:black;
-}
-
-.caption{
-  background:rgba(0,0,0,.75);
-  color:white;
-  padding:1rem;
-}
-
-/* ===================================================== */
-/* GUIDE */
-/* ===================================================== */
-
-.madrid-guide{
-  display:none;
-  margin-top:4rem;
-  background:rgba(255,255,255,.82);
-  padding:2rem;
-  border-radius:35px;
-  box-shadow:0 10px 30px rgba(0,0,0,.1);
-}
-
-body.spain .madrid-guide{
-  display:block;
-}
-
-.madrid-guide h2{
-  font-size:3rem;
-  margin-bottom:2rem;
-  font-family:'Cormorant Garamond',serif;
-  color:#a10016;
-}
-
-.guide-category{
-  margin-bottom:2rem;
-  text-align:left;
-}
-
-.guide-category h3{
-  margin-bottom:1rem;
-  color:#a10016;
-}
-
-.guide-category a{
-  display:block;
-  text-decoration:none;
-  color:#17345f;
-  padding:1rem;
-  border-radius:18px;
-  margin-bottom:.7rem;
-  background:white;
-  transition:.25s;
-}
-
-.guide-category a:hover{
-  transform:translateY(-3px);
-  background:#fff2c2;
-}
-
-/* ===================================================== */
-/* MOBILE */
-/* ===================================================== */
-
-@media(max-width:700px){
-
-  h1{
-    font-size:2.8rem;
-  }
-
-  .box{
-    width:130px;
-  }
-
-  .num{
-    font-size:3rem;
-  }
-
-  .slide img{
-    height:450px;
-  }
-
-  .locked-photo{
-    height:220px;
-  }
-
-}
-
-</style>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Maisa ✈️🇪🇸</title>
+
+  <!-- GOOGLE FONTS -->
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;700&family=Montserrat:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+
+    /* ===================================================== */
+    /* RESET */
+    /* ===================================================== */
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Montserrat',sans-serif;
+      overflow-x:hidden;
+      background:#f5f2eb;
+      color:#17345f;
+    }
+
+    /* ===================================================== */
+    /* BACKGROUNDS */
+    /* ===================================================== */
+
+    #bgArg{
+      position:fixed;
+      inset:0;
+
+      background:
+      linear-gradient(
+        to bottom,
+        #74ACDF 0%,
+        #74ACDF 33%,
+        white 33%,
+        white 66%,
+        #74ACDF 66%,
+        #74ACDF 100%
+      );
+
+      z-index:-2;
+      transition:1.5s;
+    }
+
+    #bgEsp{
+      position:fixed;
+      inset:0;
+
+      background:
+      linear-gradient(
+        to bottom,
+        #c60b1e 0%,
+        #c60b1e 25%,
+        #ffc400 25%,
+        #ffc400 75%,
+        #c60b1e 75%,
+        #c60b1e 100%
+      );
+
+      opacity:0;
+      z-index:-1;
+      transition:1.5s;
+    }
+
+    /* ===================================================== */
+    /* MAIN */
+    /* ===================================================== */
+
+    .page{
+      width:100%;
+      max-width:1100px;
+      margin:auto;
+      padding:2rem 1rem 5rem;
+      text-align:center;
+    }
+
+    /* ===================================================== */
+    /* TITLES */
+    /* ===================================================== */
+
+    .flags{
+      font-size:2.5rem;
+      margin-bottom:1rem;
+    }
+
+    h1{
+      font-family:'Cormorant Garamond',serif;
+      font-size:4rem;
+      color:#17345f;
+      margin-bottom:.5rem;
+    }
+
+    .subtitle{
+      font-size:1.1rem;
+      opacity:.8;
+      margin-bottom:2rem;
+    }
+
+    /* ===================================================== */
+    /* COUNTER */
+    /* ===================================================== */
+
+    .counter{
+      display:flex;
+      justify-content:center;
+      gap:1rem;
+      flex-wrap:wrap;
+      margin-bottom:2rem;
+    }
+
+    .box{
+      width:160px;
+      padding:1.5rem;
+      border-radius:25px;
+
+      background:rgba(255,255,255,.75);
+
+      backdrop-filter:blur(10px);
+
+      box-shadow:0 10px 30px rgba(0,0,0,.08);
+    }
+
+    .num{
+      font-size:4rem;
+      font-weight:700;
+      font-family:'Cormorant Garamond',serif;
+    }
+
+    .label{
+      letter-spacing:3px;
+      font-size:.8rem;
+      margin-top:.3rem;
+    }
+
+    /* ===================================================== */
+    /* PROGRESS */
+    /* ===================================================== */
+
+    .progress{
+      width:100%;
+      max-width:800px;
+      margin:0 auto 2rem;
+    }
+
+    .progress-bar{
+      width:100%;
+      height:10px;
+      border-radius:999px;
+      overflow:hidden;
+      background:rgba(255,255,255,.6);
+    }
+
+    .progress-fill{
+      height:100%;
+      width:0%;
+
+      background:
+      linear-gradient(
+        90deg,
+        #74ACDF,
+        #ffc400
+      );
+
+      transition:.4s;
+    }
+
+    .progress-text{
+      margin-top:.7rem;
+      display:flex;
+      justify-content:space-between;
+      font-size:.9rem;
+    }
+
+    /* ===================================================== */
+    /* DAYS */
+    /* ===================================================== */
+
+    .days-counter{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:.7rem;
+      margin:2rem 0;
+    }
+
+    .day-ball{
+      width:70px;
+      height:70px;
+      border-radius:50%;
+
+      background:white;
+
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+
+      font-weight:700;
+
+      box-shadow:0 10px 25px rgba(0,0,0,.08);
+    }
+
+    .day-ball.active{
+      background:#74ACDF;
+      color:white;
+    }
+
+    .day-ball.final{
+      background:
+      linear-gradient(
+        135deg,
+        #c60b1e,
+        #ffc400
+      );
+
+      color:white;
+    }
+
+    .day-line{
+      width:40px;
+      height:4px;
+      border-radius:999px;
+      background:white;
+    }
+
+    /* ===================================================== */
+    /* MESSAGE */
+    /* ===================================================== */
+
+    .message{
+      max-width:800px;
+      margin:0 auto 3rem;
+
+      background:rgba(255,255,255,.75);
+
+      padding:2rem;
+
+      border-radius:30px;
+
+      line-height:1.8;
+      font-size:1.1rem;
+
+      box-shadow:0 10px 30px rgba(0,0,0,.08);
+    }
+
+    /* ===================================================== */
+    /* MUSIC */
+    /* ===================================================== */
+
+    .music-player{
+      margin:2rem auto;
+      display:flex;
+      justify-content:center;
+    }
+
+    .music-player button{
+      border:none;
+
+      padding:1rem 2rem;
+
+      border-radius:999px;
+
+      background:
+      linear-gradient(
+        135deg,
+        #17345f,
+        #74ACDF
+      );
+
+      color:white;
+
+      font-size:1rem;
+      font-weight:600;
+
+      cursor:pointer;
+
+      transition:.3s;
+
+      box-shadow:0 10px 25px rgba(0,0,0,.15);
+    }
+
+    .music-player button:hover{
+      transform:translateY(-3px);
+    }
+
+    /* ===================================================== */
+    /* LOCKED GALLERY */
+    /* ===================================================== */
+
+    .locked-gallery{
+      margin:3rem auto;
+    }
+
+    .gallery-title{
+      font-size:2.2rem;
+      font-family:'Cormorant Garamond',serif;
+      margin-bottom:1.5rem;
+    }
+
+    .gallery-grid{
+      display:grid;
+
+      grid-template-columns:
+      repeat(auto-fit,minmax(220px,1fr));
+
+      gap:1rem;
+    }
+
+    .locked-photo{
+      position:relative;
+      height:320px;
+
+      border-radius:24px;
+      overflow:hidden;
+
+      box-shadow:0 10px 30px rgba(0,0,0,.15);
+    }
+
+    .locked-photo img{
+      width:100%;
+      height:100%;
+
+      object-fit:cover;
+
+      filter:blur(12px) brightness(.5);
+
+      transform:scale(1.1);
+    }
+
+    .locked-overlay{
+      position:absolute;
+      inset:0;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      font-size:4rem;
+      color:white;
+
+      backdrop-filter:blur(4px);
+    }
+
+    /* ===================================================== */
+    /* SLIDESHOW */
+    /* ===================================================== */
+
+    .slideshow{
+      display:none;
+      margin:3rem auto;
+    }
+
+    body.spain .slideshow{
+      display:block;
+    }
+
+    .slider{
+      position:relative;
+      max-width:950px;
+      margin:auto;
+
+      overflow:hidden;
+
+      border-radius:30px;
+
+      background:black;
+    }
+
+    .slide{
+      display:none;
+      animation:fade .8s ease;
+    }
+
+    .slide.active{
+      display:block;
+    }
+
+    .slide img{
+      width:100%;
+      height:700px;
+
+      object-fit:contain;
+      background:black;
+    }
+
+    .caption{
+      background:rgba(0,0,0,.75);
+      color:white;
+      padding:1rem;
+    }
+
+    @keyframes fade{
+      from{
+        opacity:0;
+      }
+
+      to{
+        opacity:1;
+      }
+    }
+
+    /* ===================================================== */
+    /* GUIDE */
+    /* ===================================================== */
+
+    .madrid-guide{
+      display:none;
+
+      margin-top:4rem;
+
+      background:rgba(255,255,255,.82);
+
+      padding:2rem;
+
+      border-radius:35px;
+
+      box-shadow:0 10px 30px rgba(0,0,0,.1);
+    }
+
+    body.spain .madrid-guide{
+      display:block;
+    }
+
+    .madrid-guide h2{
+      font-size:3rem;
+      margin-bottom:2rem;
+
+      font-family:'Cormorant Garamond',serif;
+
+      color:#a10016;
+    }
+
+    .guide-category{
+      margin-bottom:2rem;
+      text-align:left;
+    }
+
+    .guide-category h3{
+      margin-bottom:1rem;
+      color:#a10016;
+    }
+
+    .guide-category a{
+      display:flex;
+      align-items:center;
+      gap:1rem;
+
+      text-decoration:none;
+      color:#17345f;
+
+      padding:1rem;
+
+      border-radius:20px;
+
+      margin-bottom:1rem;
+
+      background:white;
+
+      transition:.25s;
+    }
+
+    .guide-category a:hover{
+      transform:translateY(-3px);
+      background:#fff2c2;
+    }
+
+    .guide-category img{
+      width:90px;
+      height:90px;
+
+      object-fit:cover;
+
+      border-radius:16px;
+    }
+
+    .guide-info{
+      display:flex;
+      flex-direction:column;
+    }
+
+    .guide-info strong{
+      font-size:1rem;
+    }
+
+    .guide-info span{
+      font-size:.9rem;
+      opacity:.7;
+    }
+
+    /* ===================================================== */
+    /* MOBILE */
+    /* ===================================================== */
+
+    @media(max-width:700px){
+
+      h1{
+        font-size:2.8rem;
+      }
+
+      .box{
+        width:130px;
+      }
+
+      .num{
+        font-size:3rem;
+      }
+
+      .slide img{
+        height:420px;
+      }
+
+      .locked-photo{
+        height:220px;
+      }
+
+      .guide-category a{
+        flex-direction:column;
+        text-align:center;
+      }
+
+    }
+
+  </style>
+
 </head>
 
 <body>
 
-<div id="bgArg"></div>
-<div id="bgEsp"></div>
+  <div id="bgArg"></div>
+  <div id="bgEsp"></div>
 
-<div class="page">
+  <div class="page">
 
-<div class="flags">🇦🇷 ✈️ 🇪🇸</div>
-
-<h1>Maisa, tu aventura empieza ✨</h1>
-
-<p class="subtitle">
-Contagem regressiva para sua nova vida em Madrid
-</p>
-
-<!-- COUNTER -->
-
-<div class="counter">
-
-  <div class="box">
-    <div class="num" id="days">00</div>
-    <div class="label">DIAS</div>
-  </div>
-
-  <div class="box">
-    <div class="num" id="hours">00</div>
-    <div class="label">HORAS</div>
-  </div>
-
-  <div class="box">
-    <div class="num" id="minutes">00</div>
-    <div class="label">MINUTOS</div>
-  </div>
-
-  <div class="box">
-    <div class="num" id="seconds">00</div>
-    <div class="label">SEGUNDOS</div>
-  </div>
-
-</div>
-
-<!-- PROGRESS -->
-
-<div class="progress">
-
-  <div class="progress-bar">
-    <div class="progress-fill" id="progressFill"></div>
-  </div>
-
-  <div class="progress-text">
-    <span>25 maio 🇦🇷</span>
-    <span id="progressText">0%</span>
-    <span>27 maio ✈️</span>
-  </div>
-
-</div>
-
-<!-- DAYS -->
-
-<div class="days-counter">
-
-  <div class="day-ball active">
-    <span>25</span>
-    <small>📍</small>
-  </div>
-
-  <div class="day-line"></div>
-
-  <div class="day-ball">
-    <span>26</span>
-    <small>🧳</small>
-  </div>
-
-  <div class="day-line"></div>
-
-  <div class="day-ball final">
-    <span>27</span>
-    <small>✈️</small>
-  </div>
-
-</div>
-
-<!-- MESSAGE -->
-
-<div class="message">
-
-“Que Madrid te receba com os braços abertos,
-que cada rua vire memória,
-e que cada novo dia te lembre o quanto você é incrível. 🇪🇸❤️”
-
-</div>
-
-<!-- LOCKED GALLERY -->
-
-<div class="locked-gallery">
-
-  <div class="gallery-title">
-    🔒 Memórias desbloqueadas em 27/05
-  </div>
-
-  <div class="gallery-grid">
-
-    <div class="locked-photo">
-      <img src="fotos/foto01.jpg">
-      <div class="locked-overlay">🔒</div>
+    <div class="flags">
+      🇦🇷 ✈️ 🇪🇸
     </div>
 
-    <div class="locked-photo">
-      <img src="fotos/foto02.jpg">
-      <div class="locked-overlay">🔒</div>
+    <h1>
+      Maisa, tu aventura empieza ✨
+    </h1>
+
+    <p class="subtitle">
+      Contagem regressiva para sua nova vida em Madrid
+    </p>
+
+    <!-- COUNTER -->
+
+    <div class="counter">
+
+      <div class="box">
+        <div class="num" id="days">00</div>
+        <div class="label">DIAS</div>
+      </div>
+
+      <div class="box">
+        <div class="num" id="hours">00</div>
+        <div class="label">HORAS</div>
+      </div>
+
+      <div class="box">
+        <div class="num" id="minutes">00</div>
+        <div class="label">MINUTOS</div>
+      </div>
+
+      <div class="box">
+        <div class="num" id="seconds">00</div>
+        <div class="label">SEGUNDOS</div>
+      </div>
+
     </div>
 
-    <div class="locked-photo">
-      <img src="fotos/foto03.jpg">
-      <div class="locked-overlay">🔒</div>
+    <!-- PROGRESS -->
+
+    <div class="progress">
+
+      <div class="progress-bar">
+        <div
+          class="progress-fill"
+          id="progressFill"
+        ></div>
+      </div>
+
+      <div class="progress-text">
+        <span>25 maio 🇦🇷</span>
+        <span id="progressText">0%</span>
+        <span>27 maio ✈️</span>
+      </div>
+
     </div>
 
-    <div class="locked-photo">
-      <img src="fotos/foto04.jpg">
-      <div class="locked-overlay">🔒</div>
+    <!-- MESSAGE -->
+
+    <div class="message">
+
+      “Que Madrid te receba com os braços abertos,
+      que cada rua vire memória,
+      e que cada novo dia te lembre o quanto você é incrível. 🇪🇸❤️”
+
+    </div>
+
+    <!-- MUSIC -->
+
+    <div class="music-player">
+
+      <button id="musicBtn">
+        🎵 Tocar música
+      </button>
+
+      <audio id="bgMusic" loop>
+        <source
+          src="musica.mp3"
+          type="audio/mpeg"
+        />
+      </audio>
+
+    </div>
+
+    <!-- SLIDESHOW -->
+
+    <div class="slideshow">
+
+      <div
+        class="slider"
+        id="sliderContainer"
+      ></div>
+
     </div>
 
   </div>
 
-</div>
+  <script>
 
-<!-- SLIDESHOW -->
+    const targetDate =
+    new Date(2026,4,27,0,0,0).getTime();
 
-<div class="slideshow">
+    function updateCounter(){
 
-  <div class="slider">
+      const now =
+      new Date().getTime();
 
-    <div class="slide active">
-      <img src="fotos/foto01.jpg">
-      <div class="caption">✨ O começo de uma nova aventura</div>
-    </div>
+      const distance =
+      targetDate - now;
 
-    <div class="slide">
-      <img src="fotos/foto02.jpg">
-      <div class="caption">❤️ Vocês sempre estarão juntos</div>
-    </div>
+      const days =
+      Math.floor(
+        distance / (1000 * 60 * 60 * 24)
+      );
 
-    <div class="slide">
-      <img src="fotos/foto03.jpg">
-      <div class="caption">🇪🇸 Madrid te espera</div>
-    </div>
+      const hours =
+      Math.floor(
+        (distance % (1000 * 60 * 60 * 24))
+        / (1000 * 60 * 60)
+      );
 
-    <div class="slide">
-      <img src="fotos/foto04.jpg">
-      <div class="caption">🌎 O mundo é seu</div>
-    </div>
+      const minutes =
+      Math.floor(
+        (distance % (1000 * 60 * 60))
+        / (1000 * 60)
+      );
 
-  </div>
+      const seconds =
+      Math.floor(
+        (distance % (1000 * 60))
+        / 1000
+      );
 
-</div>
+      document.getElementById("days")
+      .innerHTML =
+      String(days).padStart(2,'0');
 
-<!-- GUIDE -->
+      document.getElementById("hours")
+      .innerHTML =
+      String(hours).padStart(2,'0');
 
-<div class="madrid-guide">
+      document.getElementById("minutes")
+      .innerHTML =
+      String(minutes).padStart(2,'0');
 
-<h2>🇪🇸 Guia Especial de Madrid</h2>
+      document.getElementById("seconds")
+      .innerHTML =
+      String(seconds).padStart(2,'0');
 
-<div class="guide-category">
+      const startDate =
+      new Date(2026,4,25,0,0,0).getTime();
 
-<h3>🍷 Bares & Nightlife</h3>
+      const total =
+      targetDate - startDate;
 
-<a href="https://maps.google.com/?q=Lovo+Cocktail+Bar+Madrid" target="_blank">
-🍸 Lovo Cocktail Bar Madrid
-</a>
+      const current =
+      now - startDate;
 
-<a href="https://maps.google.com/?q=Salmon+Guru+Madrid" target="_blank">
-🌟 Salmon Guru
-</a>
+      const progress =
+      Math.min(
+        100,
+        Math.max(
+          0,
+          (current / total) * 100
+        )
+      );
 
-<a href="https://maps.google.com/?q=1862+Dry+Bar+Madrid" target="_blank">
-🥃 1862 Dry Bar
-</a>
+      document
+      .getElementById("progressFill")
+      .style.width =
+      progress + "%";
 
-</div>
+      document
+      .getElementById("progressText")
+      .innerHTML =
+      Math.floor(progress) + "%";
 
-<div class="guide-category">
+      if(now >= targetDate){
 
-<h3>🍽️ Restaurantes</h3>
+        document.body.classList.add("spain");
 
-<a href="https://maps.google.com/?q=Rosi+La+Loca+Madrid" target="_blank">
-📸 Rosi La Loca
-</a>
+        document
+        .getElementById("bgArg")
+        .style.opacity = "0";
 
-<a href="https://maps.google.com/?q=Inclan+Brutal+Bar+Madrid" target="_blank">
-🍷 Inclan Brutal Bar
-</a>
+        document
+        .getElementById("bgEsp")
+        .style.opacity = "1";
 
-<a href="https://maps.google.com/?q=CEBO+Madrid" target="_blank">
-⭐ CEBO Madrid
-</a>
+      }
 
-</div>
+    }
 
-<div class="guide-category">
+    setInterval(updateCounter,1000);
 
-<h3>☕ Cafés & Brunch</h3>
+    updateCounter();
 
-<a href="https://maps.google.com/?q=Federal+Cafe+Madrid" target="_blank">
-☕ Federal Café
-</a>
+    /* ===================================================== */
+    /* SLIDESHOW 38 FOTOS */
+    /* ===================================================== */
 
-<a href="https://maps.google.com/?q=HanSo+Cafe+Madrid" target="_blank">
-🍰 HanSo Café
-</a>
+    const sliderContainer =
+    document.getElementById("sliderContainer");
 
-</div>
+    const captions = [
+      "✨ Uma nova aventura",
+      "❤️ Momentos especiais",
+      "🇪🇸 Madrid te espera",
+      "🌎 O mundo é seu",
+      "📸 Memórias eternas",
+      "✈️ Novos começos"
+    ];
 
-<div class="guide-category">
+    for(let i = 1; i <= 38; i++){
 
-<h3>🏛️ Lugares imperdíveis</h3>
+      const slide =
+      document.createElement("div");
 
-<a href="https://maps.google.com/?q=Palacio+Real+Madrid" target="_blank">
-👑 Palacio Real
-</a>
+      slide.classList.add("slide");
 
-<a href="https://maps.google.com/?q=Templo+de+Debod+Madrid" target="_blank">
-🌅 Templo de Debod
-</a>
+      if(i === 1){
+        slide.classList.add("active");
+      }
 
-<a href="https://maps.google.com/?q=Gran+Via+Madrid" target="_blank">
-🌆 Gran Vía
-</a>
+      const number =
+      String(i).padStart(2,'0');
 
-</div>
+      slide.innerHTML = `
+        <img src="fotos/foto${number}.jpg">
+        <div class="caption">
+          ${captions[i % captions.length]}
+        </div>
+      `;
 
-<div class="guide-category">
+      sliderContainer.appendChild(slide);
 
-<h3>🚇 Metro de Madrid</h3>
+    }
 
-<a href="https://www.metromadrid.es/" target="_blank">
-🚇 Metro Oficial
-</a>
+    let slideIndex = 0;
 
-<a href="https://www.metromadrid.es/es/viaja-en-metro/plano-de-metro" target="_blank">
-🗺️ Mapa do metrô
-</a>
+    const slides =
+    document.querySelectorAll(".slide");
 
-</div>
+    setInterval(()=>{
 
-</div>
+      slides[slideIndex]
+      .classList.remove("active");
 
-</div>
+      slideIndex++;
 
-<script>
+      if(slideIndex >= slides.length){
+        slideIndex = 0;
+      }
 
-/* ===================================================== */
-/* DATE */
-/* ===================================================== */
+      slides[slideIndex]
+      .classList.add("active");
 
-const targetDate = new Date(2026, 4, 27, 0, 0, 0).getTime();
+    },3500);
 
-/* ===================================================== */
-/* COUNTER */
-/* ===================================================== */
+    /* ===================================================== */
+    /* MUSIC */
+    /* ===================================================== */
 
-function updateCounter(){
+    const musicBtn =
+    document.getElementById("musicBtn");
 
-  const now = new Date().getTime();
+    const bgMusic =
+    document.getElementById("bgMusic");
 
-  const distance = targetDate - now;
+    let playing = false;
 
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    musicBtn.addEventListener("click",()=>{
 
-  const hours = Math.floor(
-    (distance % (1000 * 60 * 60 * 24))
-    / (1000 * 60 * 60)
-  );
+      if(!playing){
 
-  const minutes = Math.floor(
-    (distance % (1000 * 60 * 60))
-    / (1000 * 60)
-  );
+        bgMusic.play();
 
-  const seconds = Math.floor(
-    (distance % (1000 * 60))
-    / 1000
-  );
+        musicBtn.innerHTML =
+        "⏸️ Pausar música";
 
-  document.getElementById("days").innerHTML =
-  String(days).padStart(2,'0');
+        playing = true;
 
-  document.getElementById("hours").innerHTML =
-  String(hours).padStart(2,'0');
+      }else{
 
-  document.getElementById("minutes").innerHTML =
-  String(minutes).padStart(2,'0');
+        bgMusic.pause();
 
-  document.getElementById("seconds").innerHTML =
-  String(seconds).padStart(2,'0');
+        musicBtn.innerHTML =
+        "🎵 Tocar música";
 
-  /* progress */
+        playing = false;
 
-  const startDate = new Date(2026,4,25,0,0,0).getTime();
+      }
 
-  const total = targetDate - startDate;
+    });
 
-  const current = now - startDate;
-
-  const progress = Math.min(
-    100,
-    Math.max(
-      0,
-      (current / total) * 100
-    )
-  );
-
-  document.getElementById("progressFill").style.width =
-  progress + "%";
-
-  document.getElementById("progressText").innerHTML =
-  Math.floor(progress) + "%";
-
-  /* Spain Mode */
-
-  if(now >= targetDate){
-
-    document.body.classList.add("spain");
-
-    document.getElementById("bgArg").style.opacity = "0";
-
-    document.getElementById("bgEsp").style.opacity = "1";
-
-  }
-
-}
-
-setInterval(updateCounter,1000);
-
-updateCounter();
-
-/* ===================================================== */
-/* SLIDESHOW */
-/* ===================================================== */
-
-let slideIndex = 0;
-
-const slides = document.querySelectorAll(".slide");
-
-setInterval(()=>{
-
-  slides[slideIndex].classList.remove("active");
-
-  slideIndex++;
-
-  if(slideIndex >= slides.length){
-    slideIndex = 0;
-  }
-
-  slides[slideIndex].classList.add("active");
-
-},4000);
-
-</script>
+  </script>
 
 </body>
 </html>
+```
