@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Maisa se va ✈️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html,body{
+  min-height:100%;
+  overflow-x:hidden;
+  font-family:'Outfit',sans-serif;
+  background:#f5f0e8;
+  scroll-behavior:smooth;
+}
+
+#bgArg{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  background:#f5f0e8;
+  transition:opacity 2s ease;
+}
+
+#bgArg::before{
+  content:'';
+  position:absolute;
+  inset:0;
+
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgba(116,172,223,.35) 0,
+      rgba(116,172,223,.35) 60px,
+      transparent 60px,
+      transparent 120px
+    ),
+    repeating-linear-gradient(
+      180deg,
+      rgba(116,172,223,.35) 0,
+      rgba(116,172,223,.35) 60px,
+      transparent 60px,
+      transparent 120px
+    );
+}
+
+#bgEsp{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  display:flex;
+  flex-direction:column;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 2s ease;
+}
+
+#bgEsp .r{
+  flex:1;
+  background:#c60b1e;
+}
+
+#bgEsp .y{
+  flex:2;
+  background:#ffc400;
+}
+
+.page{
+  position:relative;
+  z-index:10;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  padding:2rem 1rem 4rem;
+}
+
+.flags{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  font-size:2.3rem;
+  margin-bottom:1rem;
+}
+
+.arrow{
+  animation:pulse 1.4s infinite;
+}
+
+@keyframes pulse{
+  0%,100%{opacity:.4;}
+  50%{opacity:1;}
+}
+
+h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.4rem,7vw,5rem);
+  color:#17345f;
+}
+
+.subtitle{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:1.2rem;
+  color:#17345f;
+  margin-bottom:2rem;
+}
+
+.counter{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1rem;
+  width:100%;
+  max-width:760px;
+  margin-bottom:1.3rem;
+}
+
+.box{
+  background:rgba(255,255,255,.72);
+  border:1px solid rgba(116,172,223,.3);
+  border-radius:24px;
+  padding:1.3rem 1rem;
+  backdrop-filter:blur(12px);
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.4rem,8vw,4.5rem);
+  font-weight:700;
+  color:#17345f;
+}
+
+.lbl{
+  margin-top:.4rem;
+  letter-spacing:.18em;
+  font-size:.7rem;
+  text-transform:uppercase;
+  color:#17345f;
+  opacity:.75;
+}
+
+.progress-wrap{
+  width:100%;
+  max-width:760px;
+  margin-bottom:1rem;
+}
+
+.progress-bg{
+  width:100%;
+  height:10px;
+  background:rgba(255,255,255,.5);
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  width:0%;
+  border-radius:999px;
+  background:linear-gradient(90deg,#74ACDF,#F6B40E);
+}
+
+.progress-labels{
+  display:flex;
+  justify-content:space-between;
+  margin-top:.5rem;
+  color:#17345f;
+  font-size:.85rem;
+}
+
+.days{
+  display:flex;
+  gap:.7rem;
+  margin-top:1rem;
+  margin-bottom:2rem;
+}
+
+.day{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,.7);
+  border:1px solid rgba(116,172,223,.3);
+  color:#17345f;
+}
+
+.day.active{
+  background:#74ACDF;
+  color:white;
+}
+
+.day.final{
+  background:linear-gradient(135deg,#c60b1e,#ffc400);
+  color:white;
+}
+
+.message{
+  width:100%;
+  max-width:760px;
+  background:rgba(255,255,255,.72);
+  border-radius:30px;
+  padding:2rem;
+  margin-bottom:2rem;
+}
+
+.message p{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;
+  line-height:1.8;
+  color:#17345f;
+}
+
+.warning{
+  width:100%;
+  max-width:760px;
+  margin-bottom:2rem;
+  background:linear-gradient(
+    135deg,
+    rgba(116,172,223,.18),
+    rgba(246,180,14,.18)
+  );
+  border-radius:24px;
+  padding:1.2rem 1.5rem;
+  color:#17345f;
+  font-size:1.2rem;
+}
+
+.letter-button-wrap{
+  display:none;
+  margin-bottom:2rem;
+}
+
+.letter-button{
+  border:none;
+  cursor:pointer;
+  padding:1rem 2rem;
+  border-radius:999px;
+  font-size:1rem;
+  color:white;
+  background:linear-gradient(135deg,#c60b1e,#ffc400);
+}
+
+.slideshow{
+  width:100%;
+  max-width:900px;
+  display:none;
+  margin-bottom:2rem;
+}
+
+.slidebox{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  overflow:hidden;
+  border-radius:32px;
+  background:black;
+}
+
+.slide{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transition:opacity 1s ease;
+}
+
+.slide.active{
+  opacity:1;
+}
+
+.slide img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:black;
+}
+
+.caption{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  padding:1rem;
+  background:linear-gradient(to top,rgba(0,0,0,.7),transparent);
+  color:white;
+}
+
+.slide-controls{
+  display:flex;
+  justify-content:center;
+  gap:1rem;
+  margin-top:1rem;
+}
+
+.slide-btn{
+  border:none;
+  padding:1rem;
+  border-radius:999px;
+  cursor:pointer;
+}
+
+.guide{
+  width:100%;
+  max-width:900px;
+  display:none;
+  flex-direction:column;
+  gap:1rem;
+  margin-bottom:2rem;
+}
+
+.guide h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.4rem;
+  color:#5f0010;
+}
+
+.guide-card{
+  background:rgba(255,255,255,.85);
+  padding:1.5rem;
+  border-radius:24px;
+  text-align:left;
+}
+
+.guide-card h3{
+  margin-bottom:1rem;
+  color:#5f0010;
+}
+
+.guide-card ul{
+  padding-left:1.3rem;
+}
+
+.guide-card li{
+  margin-bottom:.8rem;
+  line-height:1.7;
+}
+
+.guide-card p{
+  line-height:1.8;
+  margin-bottom:1rem;
+}
+
+.guide-card a{
+  color:#0f4fa8;
+  word-break:break-word;
+}
+
+.music{
+  width:100%;
+  max-width:760px;
+  background:rgba(255,255,255,.72);
+  border-radius:22px;
+  padding:1rem;
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  cursor:pointer;
+}
+
+.disc{
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#74ACDF,#F6B40E);
+}
+
+.footer{
+  margin-top:1.5rem;
+  color:#17345f;
+}
+
+.signature{
+  margin-top:1rem;
+  font-family:'Cormorant Garamond',serif;
+  opacity:.5;
+}
+
+@media(max-width:700px){
+
+  .counter{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .slidebox{
+    aspect-ratio:4/5;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="bgArg"></div>
+
+<div id="bgEsp">
+  <div class="r"></div>
+  <div class="y"></div>
+  <div class="r"></div>
+</div>
+
+<div class="page">
+
+  <div class="flags">
+    <span>🇦🇷</span>
+    <span class="arrow">→</span>
+    <span>🇪🇸</span>
+  </div>
+
+  <h1>¡Maisa, te vas!</h1>
+
+  <p class="subtitle">
+    Una nueva aventura te espera…
+  </p>
+
+  <div class="counter">
+
+    <div class="box">
+      <div class="num" id="days">00</div>
+      <div class="lbl">Días</div>
+    </div>
+
+    <div class="box">
+      <div class="num" id="hours">00</div>
+      <div class="lbl">Horas</div>
+    </div>
+
+    <div class="box">
+      <div class="num" id="minutes">00</div>
+      <div class="lbl">Minutos</div>
+    </div>
+
+    <div class="box">
+      <div class="num" id="seconds">00</div>
+      <div class="lbl">Segundos</div>
+    </div>
+
+  </div>
+
+  <div class="progress-wrap">
+
+    <div class="progress-bg">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div class="progress-labels">
+      <span>25 may 🇦🇷</span>
+      <span id="progressText">0%</span>
+      <span>27 may ✈️</span>
+    </div>
+
+  </div>
+
+  <div class="days">
+
+    <div class="day active">
+      <div class="daynum">25</div>
+      <small>📍</small>
+    </div>
+
+    <div class="day">
+      <div class="daynum">26</div>
+      <small>🧳</small>
+    </div>
+
+    <div class="day final">
+      <div class="daynum">27</div>
+      <small>✈️</small>
+    </div>
+
+  </div>
+
+  <div class="message">
+
+    <p>
+      "Que España te reciba con los brazos abiertos,
+      que cada calle de Madrid sea un descubrimiento,
+      y que te lleves en la valija el amor de todos los
+      que se quedan acá. Vas a brillar, amiga! 🌺"
+    </p>
+
+  </div>
+
+  <div class="warning">
+    El 27 de mayo aparecerán nuevas sorpresas
+    en esta página... ✨
+  </div>
+
+  <div class="letter-button-wrap" id="letterButtonWrap">
+
+    <button class="letter-button" onclick="openLetter()">
+      💌 CARTA
+    </button>
+
+  </div>
+
+  <div class="slideshow" id="slideshow">
+
+    <div class="slidebox" id="slidebox"></div>
+
+    <div class="slide-controls">
+      <button class="slide-btn" onclick="prevSlide()">⟨</button>
+      <button class="slide-btn" onclick="nextSlide()">⟩</button>
+    </div>
+
+  </div>
+
+  <!-- GUIA COMPLETO -->
+
+<div class="guide" id="guide">
+
+  <h2>🌍 Guía completa para Madrid 🇪🇸</h2>
+
+  <!-- INFO GERAL -->
+
+  <div class="guide-card">
+
+    <h3>🌍 Información general sobre Madrid</h3>
+
+    <p>
+      Capital de España y una de las ciudades más vibrantes de Europa.
+    </p>
+
+    <p>
+      <strong>Mejor época para visitar:</strong>
+      primavera y otoño.
+    </p>
+
+    <h3>📍 Principales barrios para turistas</h3>
+
+    <ul>
+      <li>Malasaña</li>
+      <li>Chueca</li>
+      <li>La Latina</li>
+      <li>Salamanca</li>
+      <li>Centro / Sol</li>
+    </ul>
+
+    <h3>🔗 Enlaces útiles</h3>
+
+    <ul>
+
+      <li>
+        Turismo Oficial de Madrid
+        <br><br>
+
+        <a
+          href="https://www.esmadrid.com/es"
+          target="_blank">
+          https://www.esmadrid.com/es
+        </a>
+      </li>
+
+      <br>
+
+      <li>
+        Mapa turístico oficial de Madrid
+        <br><br>
+
+        <a
+          href="https://www.esmadrid.com/en/maps-and-essential-guides"
+          target="_blank">
+          https://www.esmadrid.com/en/maps-and-essential-guides
+        </a>
+      </li>
+
+      <br>
+
+      <li>
+        Guía oficial de la ciudad
+        <br><br>
+
+        <a
+          href="https://www.esmadrid.com/es/informacion-turistica"
+          target="_blank">
+          https://www.esmadrid.com/es/informacion-turistica
+        </a>
+      </li>
+
+    </ul>
+
+  </div>
+
+  <!-- METRO -->
+
+  <div class="guide-card">
+
+    <h3>🚇 Metro de Madrid</h3>
+
+    <p>
+      Madrid tiene uno de los mejores sistemas de metro de Europa.
+    </p>
+
+    <h3>🗺️ Mapas del metro</h3>
+
+    <ul>
+
+      <li>
+        Mapa oficial del Metro de Madrid (PDF)
+        <br><br>
+
+        <a
+          href="https://www.esmadrid.com/en/madrid-metro-map"
+          target="_blank">
+          https://www.esmadrid.com/en/madrid-metro-map
+        </a>
+      </li>
+
+      <br>
+
+      <li>
+        Mapa actualizado del metro 2026
+        <br><br>
+
+        <a
+          href="https://www.planometromadrid.org/"
+          target="_blank">
+          https://www.planometromadrid.org/
+        </a>
+      </li>
+
+      <br>
+
+      <li>
+        Mapa interactivo del metro
+        <br><br>
+
+        <a
+          href="https://www.planometromadrid.org/en-index.php"
+          target="_blank">
+          https://www.planometromadrid.org/en-index.php
+        </a>
+      </li>
+
+    </ul>
+
+    <h3>💡 Consejos rápidos</h3>
+
+    <ul>
+      <li>El metro funciona aproximadamente de 6:00 a 1:30.</li>
+      <li>La tarjeta "Multi" es la más utilizada por los turistas.</li>
+      <li>La línea 8 conecta el aeropuerto con el centro.</li>
+    </ul>
+
+  </div>
+
+  <!-- LUGARES -->
+
+  <div class="guide-card">
+
+    <h3>📍 Lugares más populares de Madrid</h3>
+
+    <h3>🏛️ Sitios turísticos imprescindibles</h3>
+
+    <ul>
+
+      <li>
+        <strong>Puerta del Sol</strong><br>
+        Centro histórico de la ciudad.
+      </li>
+
+      <li>
+        <strong>Plaza Mayor</strong><br>
+        Plaza clásica llena de cafés e historia.
+      </li>
+
+      <li>
+        <strong>Palacio Real de Madrid</strong><br>
+        El famoso palacio real español.
+      </li>
+
+      <li>
+        <strong>Parque del Retiro</strong><br>
+        El mejor parque de la ciudad para pasear.
+      </li>
+
+      <li>
+        <strong>Gran Vía</strong><br>
+        Avenida principal llena de tiendas y vida nocturna.
+      </li>
+
+      <li>
+        <strong>Museo del Prado</strong><br>
+        Uno de los museos más importantes de Europa.
+      </li>
+
+      <li>
+        <strong>Templo de Debod</strong><br>
+        El mejor lugar para ver el atardecer.
+      </li>
+
+    </ul>
+
+  </div>
+
+  <!-- BARES -->
+
+  <div class="guide-card">
+
+    <h3>🍷 Los bares más cool de Madrid</h3>
+
+    <p>
+      Cocktail bars y vida nocturna
+    </p>
+
+    <ul>
+
+      <li>
+        <strong>Lovo Cocktail Bar Madrid</strong><br>
+        Cócteles modernos y ambiente elegante.
+      </li>
+
+      <li>
+        <strong>La Santoría Cocktail Bar</strong><br>
+        Uno de los bares de cócteles más estilosos del centro.
+      </li>
+
+      <li>
+        <strong>Calle 365 l Discoteca Madrid</strong><br>
+        Muy popular entre turistas y jóvenes.
+      </li>
+
+      <li>
+        <strong>1862 Dry Bar</strong><br>
+        Bar clásico de cócteles artesanales.
+      </li>
+
+      <li>
+        <strong>Salmon Guru</strong><br>
+        Uno de los bares más premiados de Madrid.
+      </li>
+
+    </ul>
+
+  </div>
+
+  <!-- RESTAURANTES -->
+
+  <div class="guide-card">
+
+    <h3>🍽️ Restaurantes recomendados en Madrid</h3>
+
+    <p>
+      Restaurantes famosos y muy valorados
+    </p>
+
+    <ul>
+
+      <li>
+        <strong>Inclan Brutal Bar</strong><br>
+        Muy famoso por sus tapas y la presentación de los platos.
+      </li>
+
+      <li>
+        <strong>Rosi La Loca</strong><br>
+        Restaurante muy instagramable y divertido.
+      </li>
+
+      <li>
+        <strong>Los Montes de Galicia</strong><br>
+        Excelente cocina española y mariscos.
+      </li>
+
+      <li>
+        <strong>Ástor gastro-place</strong><br>
+        Restaurante moderno y sofisticado.
+      </li>
+
+      <li>
+        <strong>El Sur de Moratín</strong><br>
+        Excelente comida tradicional española.
+      </li>
+
+      <li>
+        <strong>Restaurante El Sueño de Carmen</strong><br>
+        Ambiente acogedor y platos mediterráneos.
+      </li>
+
+      <li>
+        <strong>CEBO Madrid</strong><br>
+        Experiencia gastronómica premium.
+      </li>
+
+    </ul>
+
+  </div>
+
+  <!-- CAFÉS -->
+
+  <div class="guide-card">
+
+    <h3>☕ Cafés y brunch</h3>
+
+    <ul>
+      <li>Federal Café</li>
+      <li>HanSo Café</li>
+      <li>Café de Oriente</li>
+    </ul>
+
+  </div>
+
+  <!-- COMPRAS -->
+
+  <div class="guide-card">
+
+    <h3>🛍️ Lugares para compras</h3>
+
+    <ul>
+      <li>Gran Vía</li>
+      <li>El Rastro</li>
+      <li>Barrio de Salamanca</li>
+    </ul>
+
+  </div>
+
+  <!-- EXTRA -->
+
+  <div class="guide-card">
+
+    <h3>🌇 Consejos extra</h3>
+
+    <ul>
+
+      <li>
+        Ver el atardecer en el Templo de Debod.
+      </li>
+
+      <li>
+        Ir de tapas por La Latina.
+      </li>
+
+      <li>
+        Visitar rooftops:
+      </li>
+
+      <li>Azotea del Círculo</li>
+
+      <li>RIU Plaza España Rooftop</li>
+
+    </ul>
+
+  </div>
+
+  <!-- LINKS FINAIS -->
+
+  <div class="guide-card">
+
+    <h3>🔗 Enlaces útiles en español</h3>
+
+    <ul>
+
+      <li>
+        Metro de Madrid Oficial
+        <br><br>
+
+        <a
+          href="https://www.metromadrid.es/es"
+          target="_blank">
+          https://www.metromadrid.es/es
+        </a>
+      </li>
+
+      <br>
+
+      <li>
+        Turismo Madrid
+        <br><br>
+
+        <a
+          href="https://www.esmadrid.com/es"
+          target="_blank">
+          https://www.esmadrid.com/es
+        </a>
+      </li>
+
+      <br>
+
+      <li>
+        Agenda cultural de Madrid
+        <br><br>
+
+        <a
+          href="https://www.esmadrid.com/agenda-madrid"
+          target="_blank">
+          https://www.esmadrid.com/agenda-madrid
+        </a>
+      </li>
+
+      <br>
+
+      <li>
+        Mapa turístico oficial PDF
+        <br><br>
+
+        <a
+          href="https://www.esmadrid.com/en/maps-and-essential-guides"
+          target="_blank">
+          https://www.esmadrid.com/en/maps-and-essential-guides
+        </a>
+      </li>
+
+    </ul>
+
+  </div>
+
+</div>
+
+  <div class="music">
+
+    <div class="disc">
+      🎵
+    </div>
+
+    <div>
+      <div class="music-title">
+        Una canción para Maisa 🎶
+      </div>
+
+      <div class="music-sub">
+        Tocá para escuchar ▶
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    El hogar está donde está el corazón ❤️
+  </div>
+
+  <div class="signature">
+    by: Cyber Sarang =^.^=
+  </div>
+
+</div>
+
+<script>
+
+const releaseDate =
+  new Date(2026,4,27,6,0,0);
+
+const photos = [];
+
+for(let i=1;i<=38;i++){
+
+  photos.push({
+
+    file:`foto${String(i).padStart(2,'0')}.jpg`,
+    caption:`Recuerdo especial #${i} ✨`
+
+  });
+
+}
+
+let currentSlide = 0;
+
+function updateCounter(){
+
+  const now = new Date();
+
+  const remaining =
+    releaseDate.getTime() - now.getTime();
+
+  if(remaining <= 0){
+
+    activateSpain();
+
+    return;
+  }
+
+}
+
+function activateSpain(){
+
+  document.getElementById('bgArg').style.opacity='0';
+
+  document.getElementById('bgEsp').style.opacity='1';
+
+  document.getElementById('slideshow').style.display='block';
+
+  document.getElementById('guide').style.display='flex';
+
+  document.getElementById('letterButtonWrap').style.display='block';
+
+  createSlides();
+
+}
+
+function createSlides(){
+
+  const slidebox =
+    document.getElementById('slidebox');
+
+  slidebox.innerHTML='';
+
+  photos.forEach((photo,index)=>{
+
+    const slide =
+      document.createElement('div');
+
+    slide.className =
+      'slide' + (index===0 ? ' active' : '');
+
+    slide.innerHTML = `
+      <img src="fotos/${photo.file}">
+      <div class="caption">
+        ${photo.caption}
+      </div>
+    `;
+
+    slidebox.appendChild(slide);
+
+  });
+
+}
+
+function showSlide(index){
+
+  const slides =
+    document.querySelectorAll('.slide');
+
+  slides.forEach(slide=>{
+
+    slide.classList.remove('active');
+
+  });
+
+  currentSlide =
+    (index + slides.length) % slides.length;
+
+  slides[currentSlide].classList.add('active');
+
+}
+
+function nextSlide(){
+
+  showSlide(currentSlide + 1);
+
+}
+
+function prevSlide(){
+
+  showSlide(currentSlide - 1);
+
+}
+
+setInterval(()=>{
+
+  nextSlide();
+
+},5000);
+
+activateSpain();
+
+</script>
+
+<!-- MODAL CARTA -->
+<div class="letter-modal" id="letterModal">
+  <div class="letter-content">
+    <button
+      class="close-letter"
+      onclick="closeLetter()">
+      ✕
+    </button>
+    <div class="letter-text">
+      <h2>Para Maisa 💌</h2>
+      <p>Querida Maisa,</p>
+      <p>
+        Aunque hoy nos separen kilómetros,
+        quiero que sepas que hay personas
+        que nunca se sienten lejos del corazón.
+        Y vos sos una de ellas.
+      </p>
+      <p>
+        Sos una mujer fuerte, decidida y valiente,
+        de esas que transforman el miedo en camino
+        y los sueños en realidad.
+      </p>
+      <p>
+        Emigrar nunca es fácil:
+        hay despedidas,
+        extrañar a la familia,
+        noches difíciles
+        y el peso de empezar de nuevo.
+      </p>
+      <p>
+        Pero también hay descubrimientos,
+        encuentros,
+        libertad
+        y la alegría de construir
+        una nueva vida con tus propias manos.
+      </p>
+      <p>
+        Migrar es un derecho humano.
+        Es la prueba de que nuestros sueños
+        pueden cruzar fronteras.
+      </p>
+      <p>
+        Y al final,
+        el hogar siempre va a estar
+        donde esté nuestro corazón.
+      </p>
+      <p>
+        Aun así,
+        quiero que nunca olvides
+        que existe un lugar en el mundo
+        que siempre va a ser tuyo:
+        San Juan,
+        junto a tu familia hermosa,
+        al amor de tus raíces
+        y a las personas
+        que te quieren profundamente.
+      </p>
+      <p>
+        La nostalgia va a existir,
+        pero también va a ser
+        un recuerdo de cuánto sos amada.
+      </p>
+      <p>
+        Y aunque estés lejos,
+        nunca vas a estar sin hogar.
+      </p>
+      <p>
+        Deseo de todo corazón
+        que España te reciba
+        con oportunidades,
+        felicidad
+        y momentos inolvidables.
+      </p>
+      <p>
+        Merecés vivir
+        todo aquello que soñaste.
+      </p>
+      <p class="signature-letter">
+        Con muchísimo cariño y admiración.<br><br>
+        Sara =^.^=
+      </p>
+    </div>
+  </div>
+</div>
+<style>
+.letter-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:1rem;
+  z-index:99999;
+}
+.letter-content{
+  position:relative;
+  width:100%;
+  max-width:760px;
+  max-height:90vh;
+  overflow-y:auto;
+  background:#fffaf3;
+  border-radius:32px;
+  padding:3rem 2rem;
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+.close-letter{
+  position:absolute;
+  top:1rem;
+  right:1rem;
+  width:44px;
+  height:44px;
+  border:none;
+  border-radius:50%;
+  background:#f2e6d4;
+  cursor:pointer;
+  font-size:1.1rem;
+}
+.letter-text{
+  text-align:left;
+  font-family:'Cormorant Garamond',serif;
+  color:#4a1c1c;
+}
+.letter-text h2{
+  text-align:center;
+  margin-bottom:2rem;
+  font-size:2.6rem;
+}
+.letter-text p{
+  font-size:1.45rem;
+  line-height:2;
+  margin-bottom:1.4rem;
+}
+.signature-letter{
+  text-align:right;
+  margin-top:2rem;
+}
+</style>
+<script>
+function openLetter(){
+  document.getElementById('letterModal').style.display =
+    'flex';
+}
+function closeLetter(){
+  document.getElementById('letterModal').style.display =
+    'none';
+}
+window.addEventListener('click',function(e){
+  const modal =
+    document.getElementById('letterModal');
+  if(e.target === modal){
+    closeLetter();
+  }
+});
+</script>
+
+</body>
+</html>
